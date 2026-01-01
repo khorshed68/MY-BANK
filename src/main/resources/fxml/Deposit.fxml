@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" styleClass="root-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.DepositController">
+    
+    <padding>
+        <Insets top="24" right="40" bottom="24" left="40" />
+    </padding>
+    
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="12" style="-fx-padding: 0 0 20 0;">
+        <Label text="💰" style="-fx-font-size: 48px;"/>
+        <Label text="Deposit Money" styleClass="page-title" style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 3);">
+            <font>
+                <Font name="System Bold" size="38" />
+            </font>
+        </Label>
+    </VBox>
+    
+    <!-- Form Container -->
+    <VBox spacing="22" styleClass="form-container" prefWidth="480">
+        <padding>
+            <Insets top="35" right="45" bottom="35" left="45" />
+        </padding>
+        
+        <!-- Account Number -->
+        <VBox spacing="10">
+            <Label text="🏦 Account Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="14" />
+                </font>
+            </Label>
+            <TextField fx:id="accountNumberField" promptText="Enter account number" styleClass="form-textfield" prefHeight="48">
+                <font>
+                    <Font name="System" size="14" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Deposit Amount -->
+        <VBox spacing="10">
+            <Label text="💵 Deposit Amount:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="14" />
+                </font>
+            </Label>
+            <TextField fx:id="depositAmountField" promptText="Enter amount to deposit" styleClass="form-textfield" prefHeight="48">
+                <font>
+                    <Font name="System" size="14" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true">
+            <font>
+                <Font name="System" size="10.4" />
+            </font>
+        </Label>
+        
+        <!-- Buttons -->
+        <HBox spacing="16" alignment="CENTER">
+            <padding>
+                <Insets top="10" />
+            </padding>
+            <Button text="💰 Deposit" onAction="#depositMoney" styleClass="success-button" prefWidth="200" prefHeight="50">
+                <font>
+                    <Font name="System Bold" size="14" />
+                </font>
+            </Button>
+            
+            <Button text="◀ Back" onAction="#backToDashboard" styleClass="back-button" prefWidth="200" prefHeight="50">
+                <font>
+                    <Font name="System Bold" size="14" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+</VBox>

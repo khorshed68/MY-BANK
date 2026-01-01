@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminReportsController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button" 
+                        style="-fx-background-color: white; -fx-text-fill: #667eea; -fx-font-weight: bold;"/>
+                <Label text="📊 REPORTS &amp; ANALYTICS" styleClass="title" 
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;">
+                    <font>
+                        <Font name="System Bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="16" style="-fx-background-color: #f5f7fa;">
+            <padding>
+                <Insets top="24" bottom="24" left="24" right="24"/>
+            </padding>
+            
+            <!-- Report Selection and Actions -->
+            <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <Label text="Report Type:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <ComboBox fx:id="reportTypeCombo" prefWidth="250" 
+                         style="-fx-font-size: 11px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="📊 Generate Report" onAction="#handleGenerateReport" styleClass="primary-button"
+                        style="-fx-background-color: linear-gradient(to bottom, #667eea, #764ba2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16;"/>
+                <Button text="📄 Export PDF" onAction="#handleExportPDF" styleClass="secondary-button"
+                        style="-fx-background-color: #e53e3e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16;"/>
+                <Button text="📊 Export CSV" onAction="#handleExportCSV" styleClass="secondary-button"
+                        style="-fx-background-color: #38a169; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16;"/>
+            </HBox>
+            
+            <!-- Summary Section -->
+            <HBox alignment="CENTER_LEFT" style="-fx-background-color: #edf2f7; -fx-padding: 12; -fx-background-radius: 6;">
+                <Label fx:id="summaryLabel" text="Select a report type and click Generate Report to view data" 
+                       style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #2d3748;"/>
+            </HBox>
+            
+            <!-- Report Table -->
+            <TableView fx:id="reportTable" VBox.vgrow="ALWAYS" 
+                      style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="8">
+                        <Label text="📋 No Data" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #718096;"/>
+                        <Label text="Generate a report to view data here" style="-fx-font-size: 12px; -fx-text-fill: #a0aec0;"/>
+                    </VBox>
+                </placeholder>
+            </TableView>
+            
+            <!-- Info Section -->
+            <HBox spacing="16" alignment="CENTER">
+                <VBox alignment="CENTER" spacing="4" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 6; -fx-min-width: 200;">
+                    <Label text="📈 Available Reports" style="-fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <Label text="• Daily Transaction Reports" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                    <Label text="• Account Status Reports" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                    <Label text="• Staff Activity Reports" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                    <Label text="• User Summary" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="4" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 6; -fx-min-width: 200;">
+                    <Label text="💾 Export Options" style="-fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <Label text="• CSV - Immediate export" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                    <Label text="• PDF - Info available" style="-fx-font-size: 9px; -fx-text-fill: #4a5568;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

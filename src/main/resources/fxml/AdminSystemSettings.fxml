@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminSystemSettingsController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="SYSTEM SETTINGS &amp; MAINTENANCE" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox alignment="CENTER" spacing="16">
+            <padding>
+                <Insets top="40" bottom="40" left="40" right="40"/>
+            </padding>
+            
+            <Label text="🔧 System Settings &amp; Maintenance" styleClass="title">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            
+            <Label text="Manage system configuration and maintenance" wrapText="true" textAlignment="CENTER">
+                <font>
+                    <Font size="11.2"/>
+                </font>
+            </Label>
+            
+            <VBox spacing="8" alignment="CENTER">
+                <padding>
+                    <Insets top="16"/>
+                </padding>
+                <Label text="Available Functions:"/>
+                <Label text="• Database Backup"/>
+                <Label text="• Database Restore"/>
+                <Label text="• Clear Old Logs"/>
+                <Label text="• System Health Monitoring"/>
+                <Label text="• Performance Optimization"/>
+            </VBox>
+            
+            <HBox spacing="12" alignment="CENTER">
+                <padding>
+                    <Insets top="24"/>
+                </padding>
+                <Button text="Backup Database" onAction="#handleBackupDatabase" styleClass="primary-button" prefWidth="120"/>
+                <Button text="Restore Database" onAction="#handleRestoreDatabase" styleClass="warning-button" prefWidth="120"/>
+                <Button text="Clear Logs" onAction="#handleClearLogs" styleClass="secondary-button" prefWidth="120"/>
+                <Button text="System Health" onAction="#handleSystemHealth" styleClass="info-button" prefWidth="120"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminStaffManagementController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="STAFF MANAGEMENT" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+            </HBox>
+            
+            <!-- Search and Filter -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="8" bottom="12" left="24" right="24"/>
+                </padding>
+                <TextField fx:id="searchField" promptText="Search by username, name, or email..." prefWidth="240"/>
+                <ComboBox fx:id="filterComboBox" prefWidth="120"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="+ Create Staff" onAction="#handleCreateStaff" styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" bottom="16" left="24" right="24"/>
+            </padding>
+            
+            <!-- Message Label -->
+            <Label fx:id="messageLabel" visible="false" managed="false" wrapText="true"/>
+            
+            <!-- Staff Table -->
+            <TableView fx:id="staffTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="staffIdColumn" text="ID" prefWidth="48"/>
+                    <TableColumn fx:id="usernameColumn" text="Username" prefWidth="96"/>
+                    <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="144"/>
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="160"/>
+                    <TableColumn fx:id="roleColumn" text="Role" prefWidth="80"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                </columns>
+            </TableView>
+            
+            <!-- Action Buttons -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button text="Activate" onAction="#handleActivateStaff" styleClass="success-button" prefWidth="96"/>
+                <Button text="Deactivate" onAction="#handleDeactivateStaff" styleClass="warning-button" prefWidth="96"/>
+                <Button text="Reset Password" onAction="#handleResetPassword" styleClass="secondary-button" prefWidth="112"/>
+                <Button text="View Activity" onAction="#handleViewActivity" styleClass="info-button" prefWidth="96"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

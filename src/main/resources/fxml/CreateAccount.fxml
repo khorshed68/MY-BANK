@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mybank.controllers.CreateAccountController"
+            fitToWidth="true" fitToHeight="true" 
+            hbarPolicy="NEVER" vbarPolicy="NEVER"
+            style="-fx-background: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);">
+    
+<VBox alignment="CENTER" spacing="4" prefWidth="960">
+    
+    <padding>
+        <Insets top="5" right="25" bottom="5" left="25" />
+    </padding>
+    
+    <!-- Header Section with Icon -->
+    <VBox alignment="CENTER" spacing="4" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-padding: 12 30 12 30; -fx-background-radius: 15;">
+        <Label text="🏦" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 2);"/>
+        <Label text="Account Application Form" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FFD700; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0, 0, 2); -fx-letter-spacing: 1px;">
+            <font>
+                <Font name="System Bold" size="24" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" spacing="6">
+            <Label text="✨" style="-fx-font-size: 12px;"/>
+            <Label text="Submit your application for staff approval" style="-fx-text-fill: black; -fx-font-size: 11px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0, 0, 1); -fx-background-color: rgba(255,255,255,0.2); -fx-padding: 5 15 5 15; -fx-background-radius: 20;">
+                <font>
+                    <Font name="System Bold" size="11" />
+                </font>
+            </Label>
+            <Label text="✨" style="-fx-font-size: 12px;"/>
+        </HBox>
+    </VBox>
+    
+    <!-- Form Container Card -->
+    <VBox spacing="4" style="-fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f8f9ff 100%); -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 18, 0, 0, 6); -fx-border-color: linear-gradient(to right, #667eea, #764ba2); -fx-border-width: 2; -fx-border-radius: 15;" prefWidth="800" maxWidth="800">
+        <padding>
+            <Insets top="10" right="25" bottom="10" left="25" />
+        </padding>
+        
+        <!-- Personal Information Section -->
+        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 6 12 6 12; -fx-background-radius: 10;">
+            <Label text="📋 Personal Information" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Label>
+        </HBox>
+        
+        <!-- Profile Picture Upload Section -->
+        <VBox spacing="6" alignment="CENTER">
+            <Label text="📸 Profile Picture (Optional)" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                <font>
+                    <Font name="System Bold" size="11" />
+                </font>
+            </Label>
+            
+            <HBox spacing="12" alignment="CENTER">
+                <!-- Profile Picture Preview -->
+                <StackPane fx:id="profilePictureContainer" 
+                          style="-fx-background-color: #f5f5f5; -fx-border-color: #667eea; -fx-border-width: 3; -fx-border-radius: 50; -fx-background-radius: 50; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 2);"
+                          prefWidth="100" prefHeight="100" maxWidth="100" maxHeight="100">
+                    <javafx.scene.image.ImageView fx:id="profilePicturePreview" 
+                                                  fitWidth="94" fitHeight="94" 
+                                                  preserveRatio="false"
+                                                  smooth="true">
+                        <clip>
+                            <javafx.scene.shape.Circle centerX="47" centerY="47" radius="47"/>
+                        </clip>
+                    </javafx.scene.image.ImageView>
+                    <Label text="No Image" fx:id="noImageLabel" style="-fx-text-fill: #999; -fx-font-size: 10px;"/>
+                </StackPane>
+                
+                <!-- Upload Controls -->
+                <VBox spacing="6" alignment="CENTER_LEFT">
+                    <Button text="📁 Choose Image" onAction="#chooseProfilePicture" 
+                           style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-text-fill: white; -fx-background-radius: 15px; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 8, 0, 0, 2);"
+                           prefWidth="130" prefHeight="28">
+                        <font>
+                            <Font name="System Bold" size="10" />
+                        </font>
+                    </Button>
+                    
+                    <Button text="🗑️ Remove" fx:id="removeImageButton" onAction="#removeProfilePicture" 
+                           style="-fx-background-color: #e0e0e0; -fx-text-fill: #666; -fx-background-radius: 15px; -fx-cursor: hand;"
+                           prefWidth="130" prefHeight="28" visible="false">
+                        <font>
+                            <Font name="System" size="10" />
+                        </font>
+                    </Button>
+                    
+                    <Label text="Max size: 2 MB&#10;Format: JPG, PNG, JPEG" 
+                          style="-fx-text-fill: #888; -fx-font-size: 9px;" wrapText="true"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        
+        <Separator style="-fx-background-color: #e0e0e0;"/>
+        
+        <!-- Two Column Layout for Name and Email -->
+        <GridPane hgap="10" vgap="4">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            
+            <!-- Customer Name -->
+            <VBox spacing="2" GridPane.columnIndex="0">
+                <Label text="👤 Full Name *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="customerNameField" promptText="Enter your full name" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+            
+            <!-- Email -->
+            <VBox spacing="2" GridPane.columnIndex="1">
+                <Label text="✉ Email Address" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="emailField" promptText="example@email.com" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+        </GridPane>
+        
+        <!-- Two Column Layout for Phone and Address -->
+        <GridPane hgap="10" vgap="4">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            
+            <!-- Phone Number -->
+            <VBox spacing="2" GridPane.columnIndex="0">
+                <Label text="📱 Phone Number *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="phoneNumberField" promptText="01XXXXXXXXX" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+            
+            <!-- Address -->
+            <VBox spacing="2" GridPane.columnIndex="1">
+                <Label text="🏠 Address" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="addressField" promptText="Enter your address" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+        </GridPane>
+        
+        <!-- Identity Information Section -->
+        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to right, #4facfe, #00f2fe); -fx-padding: 6 12 6 12; -fx-background-radius: 10;">
+            <Label text="🆔 Identity Information" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Label>
+        </HBox>
+        
+        <!-- Two Column Layout for Identity Type and Number -->
+        <GridPane hgap="10" vgap="4">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            
+            <!-- Identity Type -->
+            <VBox spacing="2" GridPane.columnIndex="0">
+                <Label text="📄 Identity Document Type *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="identityTypeComboBox" prefWidth="Infinity" 
+                         style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-font-size: 11px; -fx-background-color: #fafbff;"
+                         prefHeight="26">
+                    <tooltip>
+                        <Tooltip text="Select your identity document type" />
+                    </tooltip>
+                </ComboBox>
+            </VBox>
+            
+            <!-- Identity Number -->
+            <VBox spacing="2" GridPane.columnIndex="1">
+                <Label text="🔢 Identity Number *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="identityNumberField" promptText="Enter your identity number" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+        </GridPane>
+        
+        <!-- Account Details Section -->
+        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to right, #43e97b, #38f9d7); -fx-padding: 6 12 6 12; -fx-background-radius: 10;">
+            <Label text="💰 Account Details" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Label>
+        </HBox>
+        
+        <!-- Two Column Layout for Account Type and Deposit -->
+        <GridPane hgap="10" vgap="4">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            
+            <!-- Account Type -->
+            <VBox spacing="2" GridPane.columnIndex="0">
+                <Label text="💳 Account Type *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="accountTypeComboBox" prefWidth="Infinity" 
+                         style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-font-size: 11px; -fx-background-color: #fafbff;"
+                         prefHeight="26">
+                    <tooltip>
+                        <Tooltip text="Select account type" />
+                    </tooltip>
+                </ComboBox>
+            </VBox>
+            
+            <!-- Initial Deposit -->
+            <VBox spacing="2" GridPane.columnIndex="1">
+                <Label text="💵 Initial Deposit (৳) *" style="-fx-font-weight: bold; -fx-text-fill: #333; -fx-font-size: 11px;">
+                    <font>
+                        <Font name="System Bold" size="11" />
+                    </font>
+                </Label>
+                <TextField fx:id="initialDepositField" promptText="Minimum ৳1000" 
+                          style="-fx-background-radius: 8px; -fx-border-color: #c5ceff; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 11px; -fx-background-color: #fafbff; -fx-effect: innershadow(gaussian, rgba(102, 126, 234, 0.1), 5, 0, 0, 1);"
+                          prefHeight="26">
+                    <font>
+                        <Font name="System" size="13" />
+                    </font>
+                </TextField>
+            </VBox>
+        </GridPane>
+        
+        <!-- Info Box with Better Design -->
+        <HBox spacing="6" alignment="CENTER_LEFT" 
+             style="-fx-background-color: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fff3e0 100%); -fx-padding: 8; -fx-background-radius: 10px; -fx-border-color: linear-gradient(to right, #667eea, #764ba2); -fx-border-radius: 10px; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 8, 0, 0, 2);">
+            <VBox alignment="CENTER">
+                <Label text="ℹ️" style="-fx-font-size: 14px;"/>
+            </VBox>
+            <VBox spacing="2">
+                <Label text="Important Information" style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-size: 10px;">
+                    <font>
+                        <Font name="System Bold" size="10" />
+                    </font>
+                </Label>
+                <Label text="✓ Your application will be reviewed by our staff within 24 hours" style="-fx-text-fill: #555; -fx-font-size: 9px;"/>
+                <Label text="✓ You will receive a notification once your account is approved" style="-fx-text-fill: #555; -fx-font-size: 9px;"/>
+                <Label text="✓ Please ensure all information is accurate and complete" style="-fx-text-fill: #555; -fx-font-size: 9px;"/>
+            </VBox>
+        </HBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" wrapText="true" style="-fx-font-size: 11px; -fx-padding: 2;">
+            <font>
+                <Font name="System Bold" size="11" />
+            </font>
+        </Label>
+        
+        <!-- Buttons with Modern Design -->
+        <HBox spacing="12" alignment="CENTER" style="-fx-padding: 2 0 0 0;">
+            <Button text="✓ Submit Application" onAction="#createAccount" 
+                   style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #e0e0e0); -fx-text-fill: #0a3d5a; -fx-background-radius: 25px; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(67, 233, 123, 0.6), 15, 0, 0, 5); -fx-border-color: #43e97b; -fx-border-width: 2; -fx-border-radius: 25; -fx-padding: 8 30 8 30;"
+                   prefWidth="200" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+            
+            <Button text="← Back" onAction="#backToDashboard" 
+                   style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #e0e0e0); -fx-text-fill: #5a2a0a; -fx-background-radius: 25px; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(255, 107, 107, 0.6), 15, 0, 0, 5); -fx-border-color: #ff6b6b; -fx-border-width: 2; -fx-border-radius: 25; -fx-padding: 8 30 8 30;"
+                   prefWidth="120" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+</VBox>
+</ScrollPane>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mybank.controllers.CustomerManagementController"
+           style="-fx-background-color: #f5f5f5;">
+    
+    <!-- Top Bar -->
+    <top>
+        <VBox style="-fx-background-color: linear-gradient(to right, #1e3c72, #2a5298); -fx-padding: 16;">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="👥" style="-fx-font-size: 26px;"/>
+                <Label text="Customer Management" 
+                       style="-fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="◀ Back to Dashboard" onAction="#handleBack"
+                       style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="16" style="-fx-padding: 16;">
+            
+            <!-- Search and Filter -->
+            <HBox spacing="12" alignment="CENTER_LEFT" 
+                  style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <Label text="Search:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="searchField" promptText="Search by name, account, phone, email..." prefWidth="240"/>
+                <Button text="🔍 Search" onAction="#handleSearch"
+                       style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Status:" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="statusFilter" promptText="All" prefWidth="96"/>
+                <Button text="🔄 Refresh" onAction="#handleRefresh"
+                       style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                <Button text="🔓 Show Blocked" onAction="#handleShowBlocked"
+                       style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            </HBox>
+            
+            <!-- Customer Table -->
+            <VBox VBox.vgrow="ALWAYS" 
+                  style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <Label text="Customer Accounts" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 8 0;"/>
+                
+                <TableView fx:id="customersTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="accountNumberColumn" text="Account #" prefWidth="96"/>
+                        <TableColumn fx:id="customerNameColumn" text="Customer Name" prefWidth="144"/>
+                        <TableColumn fx:id="emailColumn" text="Email" prefWidth="144"/>
+                        <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="96"/>
+                        <TableColumn fx:id="accountTypeColumn" text="Type" prefWidth="80"/>
+                        <TableColumn fx:id="balanceColumn" text="Balance" prefWidth="96"/>
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                        <TableColumn fx:id="createdDateColumn" text="Created Date" prefWidth="96"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No customers found"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+            
+            <!-- Customer Details Panel -->
+            <VBox fx:id="detailsPanel" spacing="12" visible="false" managed="false"
+                  style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label text="Customer Details" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="✖" onAction="#handleCloseDetails"
+                           style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 5 10; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                </HBox>
+                
+                <Separator/>
+                
+                <GridPane hgap="12" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints minWidth="160" prefWidth="200"/>
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints minWidth="160" prefWidth="200"/>
+                    </columnConstraints>
+                    
+                    <Label text="Account Number:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="detailAccountNumber" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Customer Name:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <Label fx:id="detailCustomerName" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Email:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label fx:id="detailEmail" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Phone:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <Label fx:id="detailPhone" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Account Type:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label fx:id="detailAccountType" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Balance:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <Label fx:id="detailBalance" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Status:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <Label fx:id="detailStatus" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    
+                    <Label text="Created Date:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <Label fx:id="detailCreatedDate" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                </GridPane>
+                
+                <Separator/>
+                
+                <HBox spacing="8" alignment="CENTER">
+                    <Button fx:id="suspendBtn" text="🔒 Suspend Account" onAction="#handleSuspendAccount"
+                           style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button fx:id="activateBtn" text="✓ Activate Account" onAction="#handleActivateAccount" visible="false" managed="false"
+                           style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button fx:id="unblockBtn" text="🔓 Unblock Account" onAction="#handleUnblockAccount" visible="false" managed="false"
+                           style="-fx-background-color: #9c27b0; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button text="📝 View Transactions" onAction="#handleViewTransactions"
+                           style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

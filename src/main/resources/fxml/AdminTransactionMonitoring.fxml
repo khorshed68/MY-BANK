@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminTransactionMonitoringController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="TRANSACTION MONITORING" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="16">
+            <padding>
+                <Insets top="20" bottom="20" left="24" right="24"/>
+            </padding>
+            
+            <!-- Search and Filter Section -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search by Account Number..." 
+                          styleClass="form-textfield" prefWidth="200"/>
+                <ComboBox fx:id="filterComboBox" prefWidth="150"/>
+                <DatePicker fx:id="startDatePicker" promptText="Start Date" prefWidth="130"/>
+                <DatePicker fx:id="endDatePicker" promptText="End Date" prefWidth="130"/>
+                <Button text="🔍 Search" onAction="#handleSearch" styleClass="primary-button"/>
+                <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+            </HBox>
+            
+            <!-- Statistics Label -->
+            <Label fx:id="statsLabel" text="" styleClass="info-text">
+                <font>
+                    <Font size="12"/>
+                </font>
+            </Label>
+            
+            <!-- Transaction Table -->
+            <TableView fx:id="transactionTable" VBox.vgrow="ALWAYS" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="transactionIdColumn" text="ID" prefWidth="60"/>
+                    <TableColumn fx:id="accountNumberColumn" text="Account" prefWidth="100"/>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120"/>
+                    <TableColumn fx:id="dateColumn" text="Date/Time" prefWidth="180"/>
+                    <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="200"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+                </columns>
+            </TableView>
+            
+            <!-- Action Buttons -->
+            <HBox spacing="12" alignment="CENTER">
+                <Button text="🚩 Flag Transaction" onAction="#handleFlagTransaction" styleClass="warning-button"/>
+                <Button text="❌ Reverse Transaction" onAction="#handleReverseTransaction" styleClass="danger-button"/>
+            </HBox>
+            
+            <!-- Message Label -->
+            <Label fx:id="messageLabel" text="" wrapText="true" styleClass="message-label">
+                <font>
+                    <Font size="12"/>
+                </font>
+            </Label>
+        </VBox>
+    </center>
+</BorderPane>

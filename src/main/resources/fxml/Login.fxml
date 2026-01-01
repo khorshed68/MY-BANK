@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="28" styleClass="root-container" style="-fx-background-color: linear-gradient(to bottom, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.LoginController">
+    
+    <padding>
+        <Insets top="40" right="50" bottom="40" left="50" />
+    </padding>
+    
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="8" styleClass="header-container" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-padding: 32 40 32 40; -fx-text-fill: white;">
+        
+        <Label text="🏦" style="-fx-font-size: 72px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 5);">
+            <font>
+                <Font name="System" size="72" />
+            </font>
+        </Label>
+        
+        <Label text="MY BANK" styleClass="app-title" style="-fx-text-fill: white; -fx-font-size: 56px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
+            <font>
+                <Font name="System Bold" size="56" />
+            </font>
+        </Label>
+    </VBox>
+    
+    <!-- Login Form Container -->
+    <VBox spacing="20" styleClass="form-container" prefWidth="420">
+        <padding>
+            <Insets top="35" right="45" bottom="35" left="45" />
+        </padding>
+        
+        <!-- Phone Number -->
+        <VBox spacing="10">
+            <Label text="📱 Phone Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Label>
+            <TextField fx:id="phoneNumberField" promptText="Enter your phone number" styleClass="form-textfield" prefHeight="44">
+                <font>
+                    <Font name="System" size="14" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Password -->
+        <VBox spacing="10">
+            <Label text="🔒 Password:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Label>
+            <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="password-field" prefHeight="44">
+                <font>
+                    <Font name="System" size="14" />
+                </font>
+            </PasswordField>
+        </VBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true" minHeight="30">
+            <font>
+                <Font name="System" size="12" />
+            </font>
+        </Label>
+        
+        <!-- Buttons -->
+        <HBox spacing="16" alignment="CENTER">
+            <padding>
+                <Insets top="12" />
+            </padding>
+            
+            <Button text="✓ Login" onAction="#handleLogin" 
+                   style="-fx-background-color: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); -fx-text-fill: #0d4d2d; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(67, 233, 123, 0.5), 12, 0, 0, 4);" 
+                   prefWidth="170" prefHeight="48">
+                <font>
+                    <Font name="System Bold" size="15" />
+                </font>
+            </Button>
+            
+            <Button text="✗ Clear" onAction="#handleClear" 
+                   style="-fx-background-color: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); -fx-text-fill: #5a0a0a; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(255, 107, 107, 0.5), 12, 0, 0, 4);" 
+                   prefWidth="170" prefHeight="48">
+                <font>
+                    <Font name="System Bold" size="15" />
+                </font>
+            </Button>
+        </HBox>
+        
+        <!-- Portal Access Buttons -->
+        <HBox spacing="12" alignment="CENTER">
+            <padding>
+                <Insets top="8" />
+            </padding>
+            
+            <!-- Staff Login Button -->
+            <Button text="🔑 Staff Portal" onAction="#handleStaffPortal" 
+                   style="-fx-background-color: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -fx-text-fill: #0a3d5a; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(79, 172, 254, 0.5), 12, 0, 0, 4);" 
+                   prefWidth="195" prefHeight="42">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Button>
+            
+            <!-- Admin Login Button -->
+            <Button text="🔐 Admin Portal" onAction="#handleAdminPortal" 
+                   style="-fx-background-color: linear-gradient(135deg, #fa709a 0%, #fee140 100%); -fx-text-fill: #5a2a0a; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(250, 112, 154, 0.5), 12, 0, 0, 4);" 
+                   prefWidth="195" prefHeight="42">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Button>
+        </HBox>
+        
+        <!-- Additional Options -->
+        <HBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="8" />
+            </padding>
+            
+            <Label text="Need an account?" style="-fx-text-fill: #4a5568; -fx-font-size: 13px;">
+                <font>
+                    <Font name="System" size="13" />
+                </font>
+            </Label>
+            
+            <Hyperlink text="Register Here" onAction="#openRegistration" styleClass="hyperlink">
+                <font>
+                    <Font name="System Bold" size="13" />
+                </font>
+            </Hyperlink>
+        </HBox>
+    </VBox>
+    
+</VBox>
