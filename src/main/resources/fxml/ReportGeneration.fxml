@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mybank.controllers.ReportGenerationController"
+      alignment="CENTER" spacing="12" style="-fx-background-color: linear-gradient(to bottom, #e3f2fd, #bbdefb);">
+    
+    <padding>
+        <Insets top="16" right="32" bottom="16" left="32"/>
+    </padding>
+    
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="6.4">
+        <Label text="📊" style="-fx-font-size: 29px;"/>
+        <Label text="Report Generation" style="-fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: #0d47a1;">
+            <font>
+                <Font name="System Bold" size="19.2"/>
+            </font>
+        </Label>
+        <Label text="Generate various reports for analysis" style="-fx-text-fill: #1565c0; -fx-font-size: 10px;"/>
+    </VBox>
+    
+    <!-- Report Options Card -->
+    <VBox spacing="9.6" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"
+          maxWidth="560" prefWidth="560">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+        
+        <Label text="Select Report Type" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+            <font>
+                <Font name="System Bold" size="14.4"/>
+            </font>
+        </Label>
+        
+        <Separator/>
+        
+        <!-- Report Type Selection -->
+        <VBox spacing="8">
+            <Label text="Report Type:" style="-fx-font-weight: bold; -fx-text-fill: #444; -fx-font-size: 10px;"/>
+            <ComboBox fx:id="reportTypeComboBox" promptText="Select report type" prefWidth="Infinity"
+                     style="-fx-padding: 6; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 10px;">
+            </ComboBox>
+        </VBox>
+        
+        <!-- Date Range -->
+        <GridPane hgap="12" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            
+            <VBox spacing="4" GridPane.columnIndex="0">
+                <Label text="From Date:" style="-fx-font-weight: bold; -fx-text-fill: #444; -fx-font-size: 10px;"/>
+                <DatePicker fx:id="fromDatePicker" promptText="Select start date" prefWidth="Infinity"
+                           style="-fx-padding: 4; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+            </VBox>
+            
+            <VBox spacing="4" GridPane.columnIndex="1">
+                <Label text="To Date:" style="-fx-font-weight: bold; -fx-text-fill: #444; -fx-font-size: 10px;"/>
+                <DatePicker fx:id="toDatePicker" promptText="Select end date" prefWidth="Infinity"
+                           style="-fx-padding: 4; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+            </VBox>
+        </GridPane>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" wrapText="true" visible="false" managed="false"
+               style="-fx-font-weight: bold; -fx-font-size: 10px;"/>
+        
+        <!-- Action Buttons -->
+        <HBox spacing="9.6" alignment="CENTER">
+            <padding>
+                <Insets top="8"/>
+            </padding>
+            
+            <Button text="📊 Generate Report" onAction="#handleGenerateReport"
+                   style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 28; -fx-background-radius: 5; -fx-cursor: hand;"
+                   prefWidth="128">
+                <font>
+                    <Font name="System Bold" size="10.4"/>
+                </font>
+            </Button>
+            
+            <Button text="← Back to Dashboard" onAction="#handleBack"
+                   style="-fx-background-color: #757575; -fx-text-fill: white; -fx-padding: 12 28; -fx-background-radius: 5; -fx-cursor: hand;"
+                   prefWidth="128">
+                <font>
+                    <Font size="10.4"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+    <!-- Info Box -->
+    <HBox spacing="8" alignment="CENTER_LEFT" maxWidth="560"
+          style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 10; -fx-background-radius: 8;">
+        <Label text="ℹ️" style="-fx-font-size: 13px;"/>
+        <Label text="Select a report type and date range to generate detailed reports for analysis." 
+               style="-fx-text-fill: #555; -fx-font-size: 9px;" wrapText="true"/>
+    </HBox>
+</VBox>

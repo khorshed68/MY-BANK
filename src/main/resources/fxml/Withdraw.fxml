@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" styleClass="root-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.WithdrawController">
+    
+    <padding>
+        <Insets top="24" right="40" bottom="24" left="40" />
+    </padding>
+    
+    <!-- Header -->
+    <Label text="Withdraw Money" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28.8" />
+        </font>
+    </Label>
+    
+    <!-- Form Container -->
+    <VBox spacing="16" styleClass="form-container" prefWidth="400">
+        <padding>
+            <Insets top="24" right="32" bottom="24" left="32" />
+        </padding>
+        
+        <!-- Account Number -->
+        <VBox spacing="6.4">
+            <Label text="Account Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="accountNumberField" promptText="Enter account number" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Withdraw Amount -->
+        <VBox spacing="6.4">
+            <Label text="Withdraw Amount:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="withdrawAmountField" promptText="Enter amount to withdraw" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true">
+            <font>
+                <Font name="System" size="10.4" />
+            </font>
+        </Label>
+        
+        <!-- Buttons -->
+        <HBox spacing="12" alignment="CENTER">
+            <Button text="Withdraw" onAction="#withdrawMoney" styleClass="action-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+            
+            <Button text="Back to Dashboard" onAction="#backToDashboard" styleClass="back-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+</VBox>

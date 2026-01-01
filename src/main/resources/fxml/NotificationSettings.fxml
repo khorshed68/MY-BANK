@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" styleClass="root-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.NotificationSettingsController">
+    
+    <padding>
+        <Insets top="24" right="40" bottom="24" left="40" />
+    </padding>
+    
+    <!-- Header -->
+    <Label text="Notification Settings" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28.8" />
+        </font>
+    </Label>
+    
+    <!-- Form Container -->
+    <VBox spacing="16" styleClass="form-container" prefWidth="480">
+        <padding>
+            <Insets top="24" right="32" bottom="24" left="32" />
+        </padding>
+        
+        <!-- Current Settings Section -->
+        <VBox spacing="9.6" styleClass="info-section">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12" />
+            </padding>
+            
+            <Label text="Current Contact Information" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="12.8" />
+                </font>
+            </Label>
+            
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Email:" styleClass="info-label">
+                    <font>
+                        <Font name="System Bold" size="10.4" />
+                    </font>
+                </Label>
+                <Label fx:id="currentEmailLabel" text="Not set" styleClass="info-value">
+                    <font>
+                        <Font name="System" size="10.4" />
+                    </font>
+                </Label>
+            </HBox>
+            
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Phone:" styleClass="info-label">
+                    <font>
+                        <Font name="System Bold" size="10.4" />
+                    </font>
+                </Label>
+                <Label fx:id="currentPhoneLabel" text="Not set" styleClass="info-value">
+                    <font>
+                        <Font name="System" size="10.4" />
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+        
+        <Separator />
+        
+        <!-- Update Contact Information Section -->
+        <Label text="Update Contact Information" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="12.8" />
+            </font>
+        </Label>
+        
+        <!-- Email Field -->
+        <VBox spacing="6.4">
+            <Label text="Email Address:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="emailField" promptText="Enter email address" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Phone Number Field -->
+        <VBox spacing="6.4">
+            <Label text="Phone Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="phoneNumberField" promptText="Enter phone number" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <Separator />
+        
+        <!-- Notification Preferences Section -->
+        <Label text="Notification Preferences" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="12.8" />
+            </font>
+        </Label>
+        
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" left="8" />
+            </padding>
+            
+            <CheckBox fx:id="emailNotificationsCheckBox" text="Enable Email Notifications" styleClass="notification-checkbox">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </CheckBox>
+            
+            <Label text="Receive email alerts for login, transactions, and account activities" styleClass="help-text" wrapText="true">
+                <font>
+                    <Font name="System Italic" size="9.6" />
+                </font>
+                <padding>
+                    <Insets left="20" />
+                </padding>
+            </Label>
+            
+            <CheckBox fx:id="smsNotificationsCheckBox" text="Enable SMS Notifications" styleClass="notification-checkbox">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </CheckBox>
+            
+            <Label text="Receive SMS alerts for important account activities and transactions" styleClass="help-text" wrapText="true">
+                <font>
+                    <Font name="System Italic" size="9.6" />
+                </font>
+                <padding>
+                    <Insets left="20" />
+                </padding>
+            </Label>
+        </VBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true">
+            <font>
+                <Font name="System" size="10.4" />
+            </font>
+        </Label>
+        
+        <!-- Buttons -->
+        <HBox spacing="12" alignment="CENTER">
+            <Button text="Save Settings" onAction="#saveSettings" styleClass="action-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+            
+            <Button text="Back to Dashboard" onAction="#backToDashboard" styleClass="back-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+    <!-- Footer -->
+    <Label text="© 2025 My Bank. All rights reserved." styleClass="footer-text">
+        <font>
+            <Font name="System" size="9.6" />
+        </font>
+    </Label>
+    
+</VBox>

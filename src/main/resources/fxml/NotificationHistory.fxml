@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="16" styleClass="root-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.NotificationHistoryController">
+    
+    <padding>
+        <Insets top="24" right="40" bottom="24" left="40" />
+    </padding>
+    
+    <!-- Header -->
+    <Label text="Notification History" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28.8" />
+        </font>
+    </Label>
+    
+    <Label text="View all notifications sent to your email and phone" styleClass="subtitle-label">
+        <font>
+            <Font name="System" size="11.2" />
+        </font>
+    </Label>
+    
+    <!-- Status Label -->
+    <Label fx:id="statusLabel" text="" styleClass="info-label">
+        <font>
+            <Font name="System Bold" size="11.2" />
+        </font>
+    </Label>
+    
+    <!-- Notification Table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <TableView fx:id="notificationTable" styleClass="table-view" prefHeight="240">
+            <columns>
+                <TableColumn fx:id="timestampColumn" text="Date &amp; Time" prefWidth="144" />
+                <TableColumn fx:id="typeColumn" text="Type" prefWidth="120" />
+                <TableColumn fx:id="channelColumn" text="Channel" prefWidth="64" />
+                <TableColumn fx:id="recipientColumn" text="Sent To" prefWidth="160" />
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="64" />
+            </columns>
+        </TableView>
+    </VBox>
+    
+    <!-- Message Preview -->
+    <VBox spacing="6.4" VBox.vgrow="ALWAYS">
+        <Label text="Message Content:" styleClass="form-label">
+            <font>
+                <Font name="System Bold" size="11.2" />
+            </font>
+        </Label>
+        <TextArea fx:id="messageTextArea" editable="false" wrapText="true" 
+                  prefHeight="120" styleClass="form-textfield">
+            <font>
+                <Font name="Courier New" size="9.6" />
+            </font>
+        </TextArea>
+    </VBox>
+    
+    <!-- Info Box -->
+    <VBox spacing="6.4" styleClass="info-box" style="-fx-background-color: #e3f2fd; -fx-padding: 12; -fx-background-radius: 5;">
+        <Label text="ℹ️ Important Information" styleClass="info-label">
+            <font>
+                <Font name="System Bold" size="10.4" />
+            </font>
+        </Label>
+        <Label text="• Email and SMS notifications are currently in DEMO MODE" wrapText="true">
+            <font>
+                <Font name="System" size="9.6" />
+            </font>
+        </Label>
+        <Label text="• Notifications are displayed in the console/terminal window where the app runs" wrapText="true">
+            <font>
+                <Font name="System" size="9.6" />
+            </font>
+        </Label>
+        <Label text="• All notifications are logged here for your review" wrapText="true">
+            <font>
+                <Font name="System" size="9.6" />
+            </font>
+        </Label>
+        <Label text="• To receive actual emails/SMS, contact your system administrator" wrapText="true">
+            <font>
+                <Font name="System" size="9.6" />
+            </font>
+        </Label>
+    </VBox>
+    
+    <!-- Buttons -->
+    <HBox spacing="12" alignment="CENTER">
+        <Button text="Refresh" onAction="#refreshHistory" styleClass="action-button" prefWidth="120" prefHeight="36">
+            <font>
+                <Font name="System Bold" size="11.2" />
+            </font>
+        </Button>
+        
+        <Button text="Back to Dashboard" onAction="#backToDashboard" styleClass="back-button" prefWidth="144" prefHeight="36">
+            <font>
+                <Font name="System Bold" size="11.2" />
+            </font>
+        </Button>
+    </HBox>
+    
+</VBox>

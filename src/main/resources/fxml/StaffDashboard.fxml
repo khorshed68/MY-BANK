@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mybank.controllers.StaffDashboardController"
+           style="-fx-background-color: #f5f5f5;">
+    
+    <!-- Top Bar -->
+    <top>
+        <VBox style="-fx-background-color: linear-gradient(to right, #1e3c72, #2a5298); -fx-padding: 16;">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <!-- Profile Picture -->
+                <StackPane style="-fx-background-color: white; -fx-border-color: rgba(255,255,255,0.8); -fx-border-width: 3; -fx-border-radius: 40; -fx-background-radius: 40;"
+                          prefWidth="80" prefHeight="80" maxWidth="80" maxHeight="80">
+                    <ImageView fx:id="profilePictureView" 
+                              fitWidth="74" fitHeight="74" 
+                              preserveRatio="false"
+                              smooth="true">
+                        <clip>
+                            <Circle centerX="37" centerY="37" radius="37"/>
+                        </clip>
+                    </ImageView>
+                </StackPane>
+                
+                <Label text="🏦" style="-fx-font-size: 26px;"/>
+                <VBox>
+                    <Label text="My Bank - Staff Portal" 
+                           style="-fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="19.2"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="staffInfoLabel" text="Loading..." 
+                           style="-fx-text-fill: #d0d0d0; -fx-font-size: 10px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox alignment="CENTER_RIGHT" spacing="4">
+                    <Label fx:id="roleLabel" text="ROLE" 
+                           style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #ffd700;"/>
+                    <Label fx:id="lastLoginLabel" text="Last Login: N/A" 
+                           style="-fx-text-fill: #d0d0d0; -fx-font-size: 9px;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <VBox spacing="16" style="-fx-padding: 24;">
+                
+                <!-- Welcome Section -->
+                <VBox spacing="8" style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                    <Label fx:id="welcomeLabel" text="Welcome, Staff!" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    <Label text="Select an option from the menu below to get started" 
+                           style="-fx-text-fill: #666;"/>
+                </VBox>
+                
+                <!-- Account Management Section -->
+                <VBox fx:id="accountManagementSection" spacing="12">
+                    <Label text="Account Management" 
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                            <Font name="System Bold" size="14.4"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="12" vgap="12">
+                        <Button fx:id="viewPendingRequestsBtn" text="📋 Pending Requests" 
+                               onAction="#handleViewPendingRequests"
+                               style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="createAccountBtn" text="➕ Create Account" 
+                               onAction="#handleCreateAccount"
+                               style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="viewCustomersBtn" text="👥 View Customers" 
+                               onAction="#handleViewCustomers"
+                               style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Cheque Management Section -->
+                <VBox fx:id="chequeManagementSection" spacing="12">
+                    <Label text="Cheque Management" 
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                            <Font name="System Bold" size="14.4"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="12" vgap="12">
+                        <Button fx:id="manageChequeBtn" text="📝 Manage Cheques" 
+                               onAction="#handleManageCheques"
+                               style="-fx-background-color: #00bcd4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="240" prefHeight="64" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Reports &amp; Analytics Section -->
+                <VBox fx:id="reportsSection" spacing="12">
+                    <Label text="Reports &amp; Analytics" 
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                            <Font name="System Bold" size="14.4"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="12" vgap="12">
+                        <Button fx:id="generateReportBtn" text="📊 Generate Reports" 
+                               onAction="#handleGenerateReport"
+                               style="-fx-background-color: #9c27b0; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="viewActivityLogBtn" text="📜 Activity Logs" 
+                               onAction="#handleViewActivityLog"
+                               style="-fx-background-color: #607d8b; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Admin Section (Only for Admin/Manager) -->
+                <VBox fx:id="adminSection" spacing="12" visible="false" managed="false">
+                    <Label text="Administration" 
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                            <Font name="System Bold" size="14.4"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="12" vgap="12">
+                        <Button fx:id="manageStaffBtn" text="👨‍💼 Manage Staff" 
+                               onAction="#handleManageStaff"
+                               style="-fx-background-color: #e91e63; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="systemSettingsBtn" text="⚙️ System Settings" 
+                               onAction="#handleSystemSettings"
+                               style="-fx-background-color: #795548; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 16; -fx-background-radius: 10; -fx-cursor: hand;"
+                               prefWidth="160" prefHeight="64" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Quick Actions -->
+                <VBox spacing="8" style="-fx-background-color: #e3f2fd; -fx-padding: 12; -fx-background-radius: 10;">
+                    <Label text="ℹ️ Quick Tips" 
+                           style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #1976d2;"/>
+                    <Label text="• Check pending requests daily to ensure timely account approvals" 
+                           style="-fx-text-fill: #444; -fx-font-size: 10px;"/>
+                    <Label text="• Always log activities for compliance and audit purposes" 
+                           style="-fx-text-fill: #444; -fx-font-size: 10px;"/>
+                    <Label text="• Use the search function to quickly find customer accounts" 
+                           style="-fx-text-fill: #444; -fx-font-size: 10px;"/>
+                </VBox>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+    <!-- Bottom Bar -->
+    <bottom>
+        <HBox spacing="8" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 12; -fx-border-color: #ddd; -fx-border-width: 1 0 0 0;">
+            <Button text="🔄 Refresh" onAction="#handleRefresh"
+                   style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🔓 Logout" onAction="#handleLogout"
+                   style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;">
+                <font>
+                    <Font name="System Bold" size="9.6"/>
+                </font>
+            </Button>
+        </HBox>
+    </bottom>
+    
+</BorderPane>

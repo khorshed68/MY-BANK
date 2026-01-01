@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" styleClass="root-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybank.controllers.TransferController">
+    
+    <padding>
+        <Insets top="24" right="40" bottom="24" left="40" />
+    </padding>
+    
+    <!-- Header -->
+    <Label text="Fund Transfer" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28.8" />
+        </font>
+    </Label>
+    
+    <!-- Form Container -->
+    <VBox spacing="16" styleClass="form-container" prefWidth="400">
+        <padding>
+            <Insets top="24" right="32" bottom="24" left="32" />
+        </padding>
+        
+        <!-- From Account -->
+        <VBox spacing="6.4">
+            <Label text="From Account Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="fromAccountField" promptText="Enter sender's account number" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- To Account -->
+        <VBox spacing="6.4">
+            <Label text="To Account Number:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="toAccountField" promptText="Enter receiver's account number" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Transfer Amount -->
+        <VBox spacing="6.4">
+            <Label text="Transfer Amount:" styleClass="form-label">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Label>
+            <TextField fx:id="transferAmountField" promptText="Enter amount to transfer" styleClass="form-textfield" prefHeight="32">
+                <font>
+                    <Font name="System" size="11.2" />
+                </font>
+            </TextField>
+        </VBox>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true">
+            <font>
+                <Font name="System" size="10.4" />
+            </font>
+        </Label>
+        
+        <!-- Buttons -->
+        <HBox spacing="12" alignment="CENTER">
+            <Button text="Transfer" onAction="#transferMoney" styleClass="action-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+            
+            <Button text="Back to Dashboard" onAction="#backToDashboard" styleClass="back-button" prefWidth="144" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+</VBox>
