@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.CustomerChequeController"
+            prefHeight="800.0" prefWidth="1200.0"
+            stylesheets="@../css/style.css">
+
+    <!-- Header -->
+    <top>
+        <VBox styleClass="header" alignment="CENTER" spacing="10">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            
+            <Label text="Cheque Management" styleClass="header-title">
+                <font><Font name="Arial Bold" size="28"/></font>
+            </Label>
+            
+            <HBox spacing="15" alignment="CENTER">
+                <Label text="Select Account:"/>
+                <ComboBox fx:id="accountComboBox" prefWidth="250"/>
+                <Label fx:id="accountBalanceLabel" text="Balance: TAKA 0.00" style="-fx-font-weight: bold;"/>
+                <Label fx:id="eligibilityStatusLabel" text=""/>
+            </HBox>
+            
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="requestChequeBookBtn" text="Request Cheque Book" 
+                        onAction="#handleRequestChequeBook" styleClass="primary-button"/>
+                <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+                <Button text="Back to Dashboard" onAction="#handleBackToDashboard" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            
+            <!-- Cheque Books Tab -->
+            <Tab text="My Cheque Books">
+                <VBox spacing="10">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                    
+                    <Label text="Cheque Book Requests" styleClass="section-title">
+                        <font><Font name="Arial Bold" size="18"/></font>
+                    </Label>
+                    
+                    <TableView fx:id="chequeBookTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="bookNumberCol" text="Book Number" prefWidth="120"/>
+                            <TableColumn fx:id="accountNumCol" text="Account" prefWidth="150"/>
+                            <TableColumn fx:id="startChequeCol" text="Start Cheque #" prefWidth="120"/>
+                            <TableColumn fx:id="endChequeCol" text="End Cheque #" prefWidth="120"/>
+                            <TableColumn fx:id="totalLeavesCol" text="Total Leaves" prefWidth="90"/>
+                            <TableColumn fx:id="remainingLeavesCol" text="Remaining" prefWidth="90"/>
+                            <TableColumn fx:id="statusCol" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="requestDateCol" text="Request Date" prefWidth="150"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                    </TableView>
+                    
+                    <HBox spacing="10">
+                        <Label text="Status Legend:" style="-fx-font-weight: bold;"/>
+                        <Label text="PENDING - Awaiting approval" style="-fx-text-fill: orange;"/>
+                        <Label text="APPROVED - Approved, being processed" style="-fx-text-fill: blue;"/>
+                        <Label text="ISSUED - Active cheque book" style="-fx-text-fill: green;"/>
+                        <Label text="REJECTED - Request denied" style="-fx-text-fill: red;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+            
+            <!-- My Cheques Tab -->
+            <Tab text="My Cheques">
+                <VBox spacing="10">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                    
+                    <Label text="Issued Cheques" styleClass="section-title">
+                        <font><Font name="Arial Bold" size="18"/></font>
+                    </Label>
+                    
+                    <TableView fx:id="chequesTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="chequeNumberCol" text="Cheque Number" prefWidth="130"/>
+                            <TableColumn fx:id="chequeBookCol" text="Book Number" prefWidth="110"/>
+                            <TableColumn fx:id="amountCol" text="Amount (TAKA)" prefWidth="100"/>
+                            <TableColumn fx:id="payeeCol" text="Payee Name" prefWidth="150"/>
+                            <TableColumn fx:id="issueDateCol" text="Issue Date" prefWidth="100"/>
+                            <TableColumn fx:id="chequeStatusCol" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="depositDateCol" text="Deposit Date" prefWidth="130"/>
+                            <TableColumn fx:id="clearanceDateCol" text="Clearance Date" prefWidth="130"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                    </TableView>
+                    
+                    <HBox spacing="10">
+                        <Label text="Status Legend:" style="-fx-font-weight: bold;"/>
+                        <Label text="ISSUED - Cheque issued" style="-fx-text-fill: blue;"/>
+                        <Label text="DEPOSITED - Awaiting clearance" style="-fx-text-fill: orange;"/>
+                        <Label text="CLEARED - Successfully cleared" style="-fx-text-fill: green;"/>
+                        <Label text="BOUNCED - Cheque bounced" style="-fx-text-fill: red;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+            
+            <!-- Deposit Cheque Tab -->
+            <Tab text="Deposit Cheque">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="20">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        
+                        <Label text="Deposit a Cheque" styleClass="section-title">
+                            <font><Font name="Arial Bold" size="18"/></font>
+                        </Label>
+                        
+                        <GridPane hgap="15" vgap="15">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="150" prefWidth="150"/>
+                                <ColumnConstraints minWidth="300" prefWidth="400"/>
+                            </columnConstraints>
+                            
+                            <Label text="Cheque Number: *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                   style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="depositChequeNumberField" 
+                                      promptText="Enter 15-digit cheque number"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Cheque Amount: *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="depositAmountField" 
+                                      promptText="Enter amount in TAKA"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            
+                            <Label text="Payer Name: *" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                   style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="depositPayerNameField" 
+                                      promptText="Name on the cheque"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            
+                            <Label text="Deposit To Account: *" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                                   style="-fx-font-weight: bold;"/>
+                            <ComboBox fx:id="depositToAccountComboBox" 
+                                     promptText="Select account"
+                                     prefWidth="400"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                            
+                            <Label text="Cheque Issue Date: *" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                                   style="-fx-font-weight: bold;"/>
+                            <DatePicker fx:id="chequeIssueDatePicker" 
+                                       promptText="Select date"
+                                       prefWidth="400"
+                                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                            
+                            <Label text="Remarks:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                                   style="-fx-font-weight: bold;"/>
+                            <TextArea fx:id="depositRemarksArea" 
+                                     promptText="Optional remarks or notes"
+                                     prefRowCount="3"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        </GridPane>
+                        
+                        <HBox spacing="15" alignment="CENTER">
+                            <Button fx:id="depositChequeBtn" text="Deposit Cheque" 
+                                    onAction="#handleDepositCheque" 
+                                    styleClass="primary-button"
+                                    prefWidth="150"/>
+                            <Button text="Clear Form" 
+                                    onAction="#handleRefresh"
+                                    styleClass="secondary-button"
+                                    prefWidth="150"/>
+                        </HBox>
+                        
+                        <VBox spacing="10" style="-fx-background-color: #f0f8ff; -fx-padding: 15; -fx-border-color: #4a90e2; -fx-border-radius: 5;">
+                            <Label text="Important Information:" style="-fx-font-weight: bold; -fx-text-fill: #2c5aa0;"/>
+                            <Label text="• Ensure the cheque number is correct and matches the physical cheque" wrapText="true"/>
+                            <Label text="• Deposited cheques will be verified by staff before clearance" wrapText="true"/>
+                            <Label text="• Clearance typically takes 2-3 business days" wrapText="true"/>
+                            <Label text="• Cheques may bounce due to insufficient balance or signature mismatch" wrapText="true"/>
+                            <Label text="• You will be notified of the clearance status via email/notifications" wrapText="true"/>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+            
+            <!-- Transaction History Tab -->
+            <Tab text="Transaction History">
+                <VBox spacing="10">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                    
+                    <Label text="Cheque Transaction History" styleClass="section-title">
+                        <font><Font name="Arial Bold" size="18"/></font>
+                    </Label>
+                    
+                    <TableView fx:id="transactionTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="txChequeNumberCol" text="Cheque Number" prefWidth="120"/>
+                            <TableColumn fx:id="txTypeCol" text="Transaction Type" prefWidth="120"/>
+                            <TableColumn fx:id="txOldStatusCol" text="Old Status" prefWidth="100"/>
+                            <TableColumn fx:id="txNewStatusCol" text="New Status" prefWidth="100"/>
+                            <TableColumn fx:id="txAmountCol" text="Amount (TAKA)" prefWidth="100"/>
+                            <TableColumn fx:id="txDateCol" text="Date &amp; Time" prefWidth="150"/>
+                            <TableColumn fx:id="txRemarksCol" text="Remarks" prefWidth="200"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

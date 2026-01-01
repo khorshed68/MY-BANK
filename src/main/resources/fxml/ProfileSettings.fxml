@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mybank.controllers.ProfileSettingsController"
+            fitToWidth="true" fitToHeight="true" 
+            hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+            style="-fx-background: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);">
+    
+<VBox alignment="CENTER" spacing="10" prefWidth="800">
+    
+    <padding>
+        <Insets top="15" right="25" bottom="15" left="25" />
+    </padding>
+    
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="5">
+        <Label text="⚙️" style="-fx-font-size: 36px;"/>
+        <Label text="Profile Settings" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;">
+            <font>
+                <Font name="System Bold" size="24" />
+            </font>
+        </Label>
+        <Label text="Manage your profile information and picture" style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 13px;">
+            <font>
+                <Font name="System" size="13" />
+            </font>
+        </Label>
+    </VBox>
+    
+    <!-- Content Card -->
+    <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 4);" prefWidth="700" maxWidth="700">
+        <padding>
+            <Insets top="25" right="30" bottom="25" left="30" />
+        </padding>
+        
+        <!-- Account Information Section -->
+        <Label text="👤 Account Information" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #667eea;">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Label>
+        <Separator style="-fx-background-color: #e0e0e0;"/>
+        
+        <GridPane hgap="12" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
+            
+            <Label text="Account Number:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="accountNumberLabel" text="-" style="-fx-text-fill: #333;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            
+            <Label text="Name:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="nameLabel" text="-" style="-fx-text-fill: #333;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            
+            <Label text="Email:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="emailLabel" text="-" style="-fx-text-fill: #333;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            
+            <Label text="Phone:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="phoneLabel" text="-" style="-fx-text-fill: #333;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </GridPane>
+        
+        <Separator style="-fx-background-color: #e0e0e0; -fx-padding: 5 0 0 0;"/>
+        
+        <!-- Change Password Section -->
+        <Label text="🔐 Change Password" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #667eea;">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Label>
+        
+        <GridPane hgap="12" vgap="12">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
+            
+            <Label text="Current Password:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <PasswordField fx:id="currentPasswordField" promptText="Enter current password" 
+                          style="-fx-background-radius: 8px; -fx-border-radius: 8px; -fx-border-color: #ddd; -fx-padding: 8;"
+                          GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            
+            <Label text="New Password:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <PasswordField fx:id="newPasswordField" promptText="Enter new password (min 6 chars)" 
+                          style="-fx-background-radius: 8px; -fx-border-radius: 8px; -fx-border-color: #ddd; -fx-padding: 8;"
+                          GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            
+            <Label text="Confirm Password:" style="-fx-font-weight: bold; -fx-text-fill: #555;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <PasswordField fx:id="confirmPasswordField" promptText="Re-enter new password" 
+                          style="-fx-background-radius: 8px; -fx-border-radius: 8px; -fx-border-color: #ddd; -fx-padding: 8;"
+                          GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        </GridPane>
+        
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 5 0 0 0;">
+            <Button text="🔑 Change Password" onAction="#handleChangePassword" 
+                   style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-background-radius: 20px; -fx-font-weight: bold; -fx-cursor: hand;"
+                   prefWidth="160" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+            <Label fx:id="passwordMessageLabel" text="" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+        </HBox>
+        
+        <Separator style="-fx-background-color: #e0e0e0; -fx-padding: 5 0 0 0;"/>
+        
+        <!-- Profile Picture Section -->
+        <Label text="📸 Profile Picture" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #667eea;">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Label>
+        
+        <HBox spacing="30" alignment="CENTER">
+            <!-- Current Profile Picture -->
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="Current Picture" style="-fx-font-weight: bold; -fx-text-fill: #555; -fx-font-size: 13px;"/>
+                <StackPane style="-fx-background-color: #f5f5f5; -fx-border-color: #667eea; -fx-border-width: 3; -fx-border-radius: 80; -fx-background-radius: 80; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.3), 12, 0, 0, 3);"
+                          prefWidth="160" prefHeight="160" maxWidth="160" maxHeight="160">
+                    <ImageView fx:id="currentProfilePicture" 
+                              fitWidth="154" fitHeight="154" 
+                              preserveRatio="false"
+                              smooth="true">
+                        <clip>
+                            <Circle centerX="77" centerY="77" radius="77"/>
+                        </clip>
+                    </ImageView>
+                    <Label text="No Image" fx:id="noCurrentImageLabel" style="-fx-text-fill: #999; -fx-font-size: 13px; -fx-font-weight: 500;"/>
+                </StackPane>
+            </VBox>
+            
+            <!-- New Profile Picture Preview -->
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="New Picture Preview" style="-fx-font-weight: bold; -fx-text-fill: #555; -fx-font-size: 13px;"/>
+                <StackPane fx:id="newProfilePictureContainer" 
+                          style="-fx-background-color: #f5f5f5; -fx-border-color: #4caf50; -fx-border-width: 3; -fx-border-radius: 80; -fx-background-radius: 80; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 12, 0, 0, 3);"
+                          prefWidth="160" prefHeight="160" maxWidth="160" maxHeight="160">
+                    <ImageView fx:id="newProfilePicturePreview" 
+                              fitWidth="154" fitHeight="154" 
+                              preserveRatio="false"
+                              smooth="true">
+                        <clip>
+                            <Circle centerX="77" centerY="77" radius="77"/>
+                        </clip>
+                    </ImageView>
+                    <Label text="No New Image" fx:id="noNewImageLabel" style="-fx-text-fill: #999; -fx-font-size: 13px; -fx-font-weight: 500;"/>
+                </StackPane>
+            </VBox>
+        </HBox>
+        
+        <!-- Action Buttons -->
+        <HBox spacing="12" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+            <Button text="📁 Choose New Picture" onAction="#chooseNewPicture" 
+                   style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-background-radius: 20px; -fx-font-weight: bold; -fx-cursor: hand;"
+                   prefWidth="170" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+            
+            <Button text="💾 Save Changes" fx:id="saveButton" onAction="#saveProfilePicture" 
+                   style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-background-radius: 20px; -fx-font-weight: bold; -fx-cursor: hand;"
+                   prefWidth="150" prefHeight="36" disable="true">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+            
+            <Button text="🗑️ Remove Picture" onAction="#removePicture" 
+                   style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-background-radius: 20px; -fx-cursor: hand;"
+                   prefWidth="150" prefHeight="36">
+                <font>
+                    <Font name="System" size="12" />
+                </font>
+            </Button>
+        </HBox>
+        
+        <Label text="Max file size: 2 MB | Supported formats: JPG, PNG, JPEG" 
+              style="-fx-text-fill: #666; -fx-font-size: 11px; -fx-alignment: center;" 
+              alignment="CENTER" maxWidth="Infinity"/>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" wrapText="true" style="-fx-font-size: 12px; -fx-padding: 5; -fx-alignment: center;" 
+              alignment="CENTER" maxWidth="Infinity">
+            <font>
+                <Font name="System Bold" size="12" />
+            </font>
+        </Label>
+        
+        <!-- Back Button -->
+        <HBox alignment="CENTER" style="-fx-padding: 5 0 0 0;">
+            <Button text="← Back to Dashboard" onAction="#backToDashboard" 
+                   style="-fx-background-color: #e0e0e0; -fx-text-fill: #666; -fx-background-radius: 20px; -fx-font-weight: bold; -fx-cursor: hand;"
+                   prefWidth="160" prefHeight="34">
+                <font>
+                    <Font name="System Bold" size="12" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+    
+</VBox>
+</ScrollPane>
