@@ -1,0 +1,862 @@
+/* ===================================
+   MY BANK - STYLESHEET
+   Ultra-Modern & Premium Design
+   Enhanced with Glass Morphism & Advanced Effects
+   =================================== */
+
+/* Import Modern Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Root Container with Animated Gradient */
+.root-container {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -fx-padding: 20;
+}
+
+/* Glass Morphism Background */
+.root-container-glass {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    -fx-padding: 20;
+    -fx-backdrop-filter: blur(10px);
+}
+
+/* Animated Background Alternative */
+.root-container-alt {
+    -fx-background-color: linear-gradient(to bottom right, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+    -fx-padding: 20;
+}
+
+/* Header with Glass Effect */
+.header-container {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 25;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.5), 25, 0.5, 0, 10);
+    -fx-border-color: rgba(255, 255, 255, 0.9);
+    -fx-border-width: 2;
+    -fx-border-radius: 25;
+}
+
+.app-title {
+    -fx-text-fill: transparent;
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+    -fx-font-size: 56px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 15, 0, 0, 5);
+}
+
+.app-subtitle {
+    -fx-text-fill: #5a67d8;
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(gaussian, rgba(90, 103, 216, 0.2), 5, 0, 0, 2);
+}
+
+.page-title {
+    -fx-text-fill: #667eea;
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 4);
+}
+
+/* Menu Container */
+.menu-container {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.25), 15, 0, 0, 5);
+}
+
+/* Button Styling with Modern Gradients */
+.menu-button {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);
+    -fx-padding: 12 24 12 24;
+}
+
+.menu-button:hover {
+    -fx-background-color: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(118, 75, 162, 0.6), 15, 0, 0, 6);
+}
+
+.menu-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #5a67d8 0%, #6b5b95 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 5, 0, 0, 2);
+}
+
+.exit-button {
+    -fx-background-color: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.4), 10, 0, 0, 4);
+    -fx-padding: 12 24 12 24;
+}
+
+.exit-button:hover {
+    -fx-background-color: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.6), 15, 0, 0, 6);
+}
+
+.exit-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Action Buttons */
+.action-button {
+    -fx-background-color: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(79, 172, 254, 0.4), 10, 0, 0, 4);
+    -fx-padding: 10 20 10 20;
+}
+
+.action-button:hover {
+    -fx-background-color: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0, 242, 254, 0.6), 15, 0, 0, 6);
+}
+
+.action-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #3d8fd1 0%, #00b9d4 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Back Button */
+.back-button {
+    -fx-background-color: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(168, 237, 234, 0.4), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.back-button:hover {
+    -fx-background-color: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(254, 214, 227, 0.6), 12, 0, 0, 4);
+}
+
+.back-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #9dd7d4 0%, #e5c3d1 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Form Container */
+.form-container {
+    -fx-background-color: rgba(255, 255, 255, 0.98);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 20, 0, 0, 8);
+    -fx-border-color: rgba(255, 255, 255, 0.9);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+}
+
+/* Form Labels */
+.form-label {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+/* Text Fields with Modern Design */
+.form-textfield {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+.form-textfield:focused {
+    -fx-border-color: #667eea;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 3);
+}
+
+/* Message Labels */
+.message-label {
+    -fx-font-size: 13px;
+    -fx-padding: 12;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 8;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+/* Balance Display with Modern Card */
+.balance-display {
+    -fx-background-color: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -fx-background-radius: 15;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(240, 147, 251, 0.4), 15, 0, 0, 5);
+}
+
+.info-label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.balance-label {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+/* Search Container */
+.search-container {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 10, 0, 0, 4);
+}
+
+/* Transaction Table with Modern Styling */
+.transaction-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 15, 0, 0, 5);
+}
+
+.transaction-table .column-header {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-alignment: center;
+    -fx-padding: 12;
+}
+
+.transaction-table .column-header-background {
+    -fx-background-color: #667eea;
+}
+
+.transaction-table .table-cell {
+    -fx-border-color: #f7fafc;
+    -fx-padding: 10;
+    -fx-alignment: center-left;
+    -fx-font-size: 13px;
+}
+
+.transaction-table .table-row-cell {
+    -fx-background-color: white;
+}
+
+.transaction-table .table-row-cell:odd {
+    -fx-background-color: #f7fafc;
+}
+
+.transaction-table .table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, #e0e7ff, #ede9fe);
+    -fx-text-fill: #5a67d8;
+}
+
+.transaction-table .table-row-cell:hover {
+    -fx-background-color: #edf2f7;
+    -fx-cursor: hand;
+}
+
+/* Footer Text */
+.footer-text {
+    -fx-text-fill: #718096;
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+}
+
+/* Modern Scrollbar Styling */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, #667eea, #764ba2);
+    -fx-background-radius: 8;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #764ba2, #667eea);
+}
+
+.scroll-bar .track {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 8;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Selection Styling */
+.text-field:focused {
+    -fx-prompt-text-fill: #a0aec0;
+}
+
+/* Placeholder Styling */
+TextField {
+    -fx-prompt-text-fill: #a0aec0;
+}
+
+/* ===================================
+   LOGIN & AUTHENTICATION STYLING
+   =================================== */
+
+/* Login Button with Gradient */
+.login-button {
+    -fx-background-color: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(67, 233, 123, 0.4), 10, 0, 0, 4);
+    -fx-padding: 12 24 12 24;
+}
+
+.login-button:hover {
+    -fx-background-color: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(56, 249, 215, 0.6), 15, 0, 0, 6);
+}
+
+.login-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #3ad267 0%, #30d9bd 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Clear Button */
+.clear-button {
+    -fx-background-color: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    -fx-text-fill: #744210;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(252, 182, 159, 0.4), 8, 0, 0, 3);
+    -fx-padding: 12 24 12 24;
+}
+
+.clear-button:hover {
+    -fx-background-color: linear-gradient(135deg, #fcb69f 0%, #ffecd2 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(252, 182, 159, 0.6), 12, 0, 0, 4);
+}
+
+.clear-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #e5a88b 0%, #e6d5be 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Logout Button */
+.logout-button {
+    -fx-background-color: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(250, 112, 154, 0.4), 10, 0, 0, 4);
+    -fx-padding: 12 24 12 24;
+}
+
+.logout-button:hover {
+    -fx-background-color: linear-gradient(135deg, #fee140 0%, #fa709a 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(254, 225, 64, 0.6), 15, 0, 0, 6);
+}
+
+.logout-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #d9608a 0%, #e0c737 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Password Field */
+.password-field {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+.password-field:focused {
+    -fx-border-color: #667eea;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 3);
+}
+
+/* Hyperlink with Modern Style */
+.hyperlink {
+    -fx-text-fill: #667eea;
+    -fx-font-size: 13px;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #764ba2;
+}
+
+.hyperlink:pressed {
+    -fx-text-fill: #5a67d8;
+}
+/* ===================================
+   PROFILE PICTURE STYLES
+   =================================== */
+
+/* Profile Picture Container */
+.profile-picture-container {
+    -fx-background-color: white;
+    -fx-border-color: #667eea;
+    -fx-border-width: 3;
+    -fx-border-radius: 75;
+    -fx-background-radius: 75;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 3);
+}
+
+/* Profile Picture in Dashboard Header */
+.profile-picture-header {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-width: 3;
+    -fx-border-radius: 60;
+    -fx-background-radius: 60;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 10, 0, 0, 0);
+}
+
+/* Profile Picture Upload Preview */
+.profile-picture-preview {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #667eea;
+    -fx-border-width: 2;
+    -fx-border-radius: 75;
+    -fx-background-radius: 75;
+    -fx-effect: dropshadow(gaussian, rgba(103, 126, 234, 0.3), 5, 0, 0, 2);
+}
+
+.profile-picture-preview:hover {
+    -fx-border-color: #764ba2;
+    -fx-effect: dropshadow(gaussian, rgba(118, 75, 162, 0.4), 8, 0, 0, 3);
+}
+
+/* Circular Image Clip */
+.circular-image {
+    -fx-clip: circle(50% at 50% 50%);
+}
+
+/* Profile Image - Ensures all images display as circles 
+   Note: Images are clipped using Circle shape in FXML for perfect circular display
+   regardless of original image dimensions (square or rectangular) */
+.profile-image-circle {
+    -fx-smooth: true;
+}
+
+/* Profile Settings Button */
+.profile-button {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);
+    -fx-padding: 10 20 10 20;
+}
+
+.profile-button:hover {
+    -fx-background-color: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(118, 75, 162, 0.6), 15, 0, 0, 6);
+}
+
+.profile-button:pressed {
+    -fx-background-color: linear-gradient(135deg, #5a67d8 0%, #6b5b95 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* ===================================
+   MODERN CARD COMPONENTS
+   =================================== */
+
+/* Stat Card for Dashboard */
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 10, 0, 0, 5);
+    -fx-border-color: rgba(102, 126, 234, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+}
+
+.stat-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 15, 0, 0, 8);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.stat-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.stat-value {
+    -fx-text-fill: #667eea;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+/* Action Card */
+.action-card {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 15, 0, 0, 5);
+    -fx-padding: 20;
+}
+
+.action-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.5), 20, 0, 0, 8);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Info Card */
+.info-card {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 3);
+    -fx-padding: 16;
+}
+
+/* ===================================
+   MODERN BUTTON VARIANTS
+   =================================== */
+
+/* Primary Button */
+.primary-button {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Success Button */
+.success-button {
+    -fx-background-color: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(67, 233, 123, 0.4), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.success-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Warning Button */
+.warning-button {
+    -fx-background-color: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(250, 112, 154, 0.4), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.warning-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Danger Button */
+.danger-button {
+    -fx-background-color: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.4), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.danger-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Secondary Button */
+.secondary-button {
+    -fx-background-color: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(168, 237, 234, 0.3), 8, 0, 0, 3);
+    -fx-padding: 10 20 10 20;
+}
+
+.secondary-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===================================
+   MODERN HEADERS & SECTIONS
+   =================================== */
+
+.header {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 5);
+}
+
+.header-section {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 15, 0, 0, 5);
+}
+
+.section-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.title {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+/* ===================================
+   MODERN FORM ELEMENTS
+   =================================== */
+
+ComboBox {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+ComboBox:focused {
+    -fx-border-color: #667eea;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 3);
+}
+
+ComboBox:hover {
+    -fx-border-color: #8b95ea;
+}
+
+DatePicker {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+DatePicker:focused {
+    -fx-border-color: #667eea;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 10, 0, 0, 3);
+}
+
+DatePicker:hover {
+    -fx-border-color: #8b95ea;
+}
+
+/* Modern Scroll Pane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ===================================
+   ADVANCED VISUAL EFFECTS
+   =================================== */
+
+/* Glassmorphism Card */
+.glass-card {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.4);
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0, 0, 10);
+}
+
+/* Neon Glow Effect */
+.neon-button {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-padding: 14 28 14 28;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.8), 20, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.neon-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(118, 75, 162, 1.0), 30, 0, 0, 0);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+}
+
+/* Elevated Card with 3D Effect */
+.elevated-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.3), 20, 0, 0, 15);
+    -fx-border-color: rgba(102, 126, 234, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+}
+
+.elevated-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.5), 30, 0, 0, 20);
+    -fx-translate-y: -5;
+}
+
+/* Gradient Text */
+.gradient-text {
+    -fx-fill: linear-gradient(to right, #667eea, #764ba2, #f093fb);
+    -fx-font-weight: bold;
+}
+
+/* Shimmer Effect Background */
+.shimmer-bg {
+    -fx-background-color: linear-gradient(90deg, 
+        rgba(102, 126, 234, 0.1) 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        rgba(118, 75, 162, 0.1) 100%);
+}
+
+/* Pulse Animation Class */
+.pulse {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.6), 15, 0, 0, 0);
+}
+
+/* Icon Badge */
+.icon-badge {
+    -fx-background-color: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -fx-background-radius: 50%;
+    -fx-padding: 8;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.4), 10, 0, 0, 3);
+}
+
+/* Premium Badge */
+.premium-badge {
+    -fx-background-color: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    -fx-text-fill: white;
+    -fx-padding: 6 16 6 16;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 216, 155, 0.5), 10, 0, 0, 3);
+}
+
+/* Notification Dot */
+.notification-dot {
+    -fx-background-color: #f5576c;
+    -fx-background-radius: 50%;
+    -fx-min-width: 12;
+    -fx-min-height: 12;
+    -fx-max-width: 12;
+    -fx-max-height: 12;
+    -fx-effect: dropshadow(gaussian, rgba(245, 87, 108, 0.6), 8, 0, 0, 0);
+}
+
+/* Divider Line */
+.divider-gradient {
+    -fx-background-color: linear-gradient(to right, 
+        transparent, 
+        rgba(102, 126, 234, 0.4), 
+        transparent);
+    -fx-pref-height: 2;
+}
