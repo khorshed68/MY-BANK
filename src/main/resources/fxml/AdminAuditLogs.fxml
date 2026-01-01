@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminAuditLogsController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="AUDIT LOGS" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+            </HBox>
+            
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="8" bottom="12" left="24" right="24"/>
+                </padding>
+                <TextField fx:id="searchField" promptText="Search by username or details..." prefWidth="240"/>
+                <ComboBox fx:id="filterComboBox" prefWidth="120"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" bottom="16" left="24" right="24"/>
+            </padding>
+            
+            <Label fx:id="messageLabel" visible="false" managed="false" wrapText="true"/>
+            
+            <TableView fx:id="auditTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="timestampColumn" text="Timestamp" prefWidth="120"/>
+                    <TableColumn fx:id="userTypeColumn" text="User Type" prefWidth="80"/>
+                    <TableColumn fx:id="usernameColumn" text="Username" prefWidth="96"/>
+                    <TableColumn fx:id="actionColumn" text="Action" prefWidth="80"/>
+                    <TableColumn fx:id="moduleColumn" text="Module" prefWidth="80"/>
+                    <TableColumn fx:id="detailsColumn" text="Details" prefWidth="240"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="64"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

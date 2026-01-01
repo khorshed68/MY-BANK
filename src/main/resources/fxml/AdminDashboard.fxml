@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminDashboardController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <!-- Top Bar -->
+    <top>
+        <VBox styleClass="header" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 5);">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="20" bottom="20" left="28" right="28"/>
+                </padding>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🏦" style="-fx-font-size: 36px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 3);"/>
+                    <Label text="ADMIN DASHBOARD" styleClass="title" style="-fx-text-fill: #FFD700; -fx-font-size: 32px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 4); -fx-letter-spacing: 1px; -fx-font-weight: bold;">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="12" alignment="CENTER_RIGHT">
+                    <StackPane style="-fx-background-color: white; -fx-border-color: rgba(0,0,0,0.2); -fx-border-width: 2; -fx-border-radius: 30; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 2);"
+                              prefWidth="60" prefHeight="60" maxWidth="60" maxHeight="60">
+                        <ImageView fx:id="adminProfileImageView" 
+                                  fitWidth="56" fitHeight="56" 
+                                  preserveRatio="false"
+                                  smooth="true">
+                            <clip>
+                                <javafx.scene.shape.Circle centerX="28" centerY="28" radius="28"/>
+                            </clip>
+                        </ImageView>
+                    </StackPane>
+                    <VBox alignment="CENTER_RIGHT" spacing="2">
+                        <Label text="👤 Welcome," style="-fx-text-fill: #2d3748; -fx-font-size: 12px; -fx-font-weight: bold;">
+                            <font>
+                                <Font name="System Bold" size="12"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="welcomeLabel" text="Admin" styleClass="subtitle" style="-fx-text-fill: #1a202c; -fx-font-size: 18px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+                <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="secondary-button" style="-fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe); -fx-text-fill: white; -fx-background-radius: 20; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(79, 172, 254, 0.6), 10, 0, 0, 3); -fx-padding: 8 16 8 16;">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Button>
+                <Button text="🚪 Logout" onAction="#handleLogout" styleClass="danger-button" style="-fx-background-color: linear-gradient(to bottom, #ff6b6b, #ee5a6f); -fx-text-fill: white; -fx-background-radius: 20; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(255, 107, 107, 0.6), 10, 0, 0, 3); -fx-padding: 8 16 8 16;">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="scroll-pane" style="-fx-background-color: #f7fafc;">
+            <VBox spacing="20">
+                <padding>
+                    <Insets top="20" bottom="20" left="28" right="28"/>
+                </padding>
+                
+                <!-- Statistics Overview -->
+                <VBox spacing="16">
+                    <Label text="System Overview" styleClass="section-title" style="-fx-font-size: 20px; -fx-text-fill: #2d3748;">
+                        <font>
+                            <Font name="System Bold" size="20"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="20" vgap="20">
+                        <!-- Row 1 -->
+                        <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="20" bottom="20" left="20" right="20"/>
+                            </padding>
+                            <Label text="Total Customers" styleClass="stat-label">
+                                <font>
+                                    <Font size="13"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="totalCustomersLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="36"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="20" bottom="20" left="20" right="20"/>
+                            </padding>
+                            <Label text="Total Accounts" styleClass="stat-label">
+                                <font>
+                                    <Font size="13"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="totalAccountsLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="36"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="20" bottom="20" left="20" right="20"/>
+                            </padding>
+                            <Label text="Total Staff" styleClass="stat-label">
+                                <font>
+                                    <Font size="13"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="totalStaffLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Total Admins" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="totalAdminsLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <!-- Row 2 -->
+                        <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Today's Transactions" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="todayTransactionsLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Transaction Amount" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="todayTransactionsAmountLabel" text="৳ 0.00" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="19.2"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Active Accounts" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="activeAccountsLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <VBox styleClass="stat-card-warning" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Pending Approvals" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="pendingApprovalsLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                        
+                        <!-- Row 3 -->
+                        <VBox styleClass="stat-card-danger" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <padding>
+                                <Insets top="16" bottom="16" left="16" right="16"/>
+                            </padding>
+                            <Label text="Suspicious Activities" styleClass="stat-label">
+                                <font>
+                                    <Font size="9.6"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="suspiciousActivitiesLabel" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="25.6"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Quick Actions -->
+                <VBox spacing="12">
+                    <Label text="Quick Actions" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="14.4"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="12" vgap="12">
+                        <!-- Row 1 -->
+                        <Button text="👥 Staff Management" 
+                               onAction="#handleStaffManagement" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="🧑‍💼 Customer Oversight" 
+                               onAction="#handleCustomerOversight" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="💳 Transaction Monitoring" 
+                               onAction="#handleTransactionMonitoring" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="⚙ Bank Configuration" 
+                               onAction="#handleBankConfig" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <!-- Row 2 -->
+                        <Button text="📊 Reports &amp; Analytics" 
+                               onAction="#handleReports" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="📝 Audit Logs" 
+                               onAction="#handleAuditLogs" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="🔧 System Settings" 
+                               onAction="#handleSystemSettings" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <Button text="👤 Admin Management" 
+                               onAction="#handleAdminManagement" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                        
+                        <!-- Row 3 - Cheque Management -->
+                        <Button text="📝 Cheque Oversight" 
+                               onAction="#handleChequeOversight" 
+                               styleClass="dashboard-button"
+                               prefHeight="64"
+                               prefWidth="200"
+                               GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               style="-fx-background-color: linear-gradient(to bottom, #00bcd4, #0097a7); -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 188, 212, 0.5), 8, 0, 0, 2);">
+                            <font>
+                                <Font name="System Bold" size="11.2"/>
+                            </font>
+                        </Button>
+                    </GridPane>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

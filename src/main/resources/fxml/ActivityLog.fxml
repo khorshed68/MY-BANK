@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mybank.controllers.ActivityLogController"
+           style="-fx-background-color: #f5f5f5;">
+    
+    <!-- Top Bar -->
+    <top>
+        <VBox style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-padding: 20;">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Label text="📜" style="-fx-font-size: 32px;"/>
+                <Label text="Staff Activity Log" 
+                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);">
+                    <font>
+                        <Font name="System Bold" size="24"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="◀ Back to Dashboard" onAction="#handleBack" styleClass="back-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #f7fafc;">
+            
+            <!-- Filter Section -->
+            <HBox spacing="16" alignment="CENTER_LEFT" styleClass="info-card"
+                  style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.2), 15, 0, 0, 5);">
+                <Label text="Filter:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #4a5568;"/>
+                <ComboBox fx:id="staffFilter" promptText="All Staff" prefWidth="140"/>
+                <ComboBox fx:id="actionFilter" promptText="All Actions" prefWidth="140"/>
+                <DatePicker fx:id="fromDate" promptText="From Date" prefWidth="120"/>
+                <DatePicker fx:id="toDate" promptText="To Date" prefWidth="120"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="success-button"/>
+            </HBox>
+            
+            <!-- Activity Table -->
+            <VBox VBox.vgrow="ALWAYS" 
+                  style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.2), 15, 0, 0, 5);">
+                <Label text="Activity History" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-padding: 0 0 12 0;"/>
+                
+                <TableView fx:id="activityTable" VBox.vgrow="ALWAYS" styleClass="transaction-table">
+                    <columns>
+                        <TableColumn fx:id="timestampColumn" text="Timestamp" prefWidth="140"/>
+                        <TableColumn fx:id="staffNameColumn" text="Staff Member" prefWidth="140"/>
+                        <TableColumn fx:id="actionColumn" text="Action" prefWidth="140"/>
+                        <TableColumn fx:id="targetAccountColumn" text="Target Account" prefWidth="120"/>
+                        <TableColumn fx:id="detailsColumn" text="Details" prefWidth="280"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No activity logs found" style="-fx-text-fill: #a0aec0; -fx-font-size: 14px;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

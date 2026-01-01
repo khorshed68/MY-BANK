@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminBankConfigController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="BANK CONFIGURATION" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="categoryFilter" promptText="Filter by Category" prefWidth="160"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" bottom="16" left="24" right="24"/>
+            </padding>
+            
+            <Label fx:id="messageLabel" visible="false" managed="false" wrapText="true"/>
+            
+            <TableView fx:id="configTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="keyColumn" text="Configuration Key" prefWidth="200"/>
+                    <TableColumn fx:id="valueColumn" text="Value" prefWidth="96"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120"/>
+                    <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="240"/>
+                </columns>
+            </TableView>
+            
+            <HBox spacing="8" alignment="CENTER">
+                <Button text="Update Value" onAction="#handleUpdateValue" styleClass="primary-button" prefWidth="112"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

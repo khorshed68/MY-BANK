@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mybank.controllers.AccountApprovalController"
+           style="-fx-background-color: #f5f5f5;">
+    
+    <!-- Top Bar -->
+    <top>
+        <VBox style="-fx-background-color: linear-gradient(to right, #1e3c72, #2a5298); -fx-padding: 16;">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="📋" style="-fx-font-size: 26px;"/>
+                <Label text="Account Approval Queue" 
+                       style="-fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="pendingCountLabel" text="Pending: 0" 
+                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ffd700;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 16;">
+            
+            <!-- Filter Bar -->
+            <HBox spacing="12" alignment="CENTER_LEFT" 
+                  style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <Label text="Filter:" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="statusFilter" promptText="All Statuses" prefWidth="120"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#handleRefresh"
+                       style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            </HBox>
+            
+            <!-- Requests Table -->
+            <TableView fx:id="requestsTable" 
+                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+                      VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="requestIdColumn" text="ID" prefWidth="48"/>
+                    <TableColumn fx:id="customerNameColumn" text="Customer Name" prefWidth="144"/>
+                    <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="96"/>
+                    <TableColumn fx:id="accountTypeColumn" text="Account Type" prefWidth="96"/>
+                    <TableColumn fx:id="depositColumn" text="Initial Deposit" prefWidth="104"/>
+                    <TableColumn fx:id="requestDateColumn" text="Request Date" prefWidth="120"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                    <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="120"/>
+                </columns>
+            </TableView>
+            
+            <!-- Request Details Panel -->
+            <VBox fx:id="detailsPanel" spacing="8" 
+                  style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+                  visible="false" managed="false">
+                
+                <Label text="Request Details" 
+                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                    <font>
+                        <Font name="System Bold" size="14.4"/>
+                    </font>
+                </Label>
+                
+                <GridPane hgap="12" vgap="8">
+                    <Label text="Customer Name:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="detailCustomerName" text="" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Email:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label fx:id="detailEmail" text="" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Phone:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label fx:id="detailPhone" text="" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Address:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <Label fx:id="detailAddress" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    
+                    <Label text="Identity Type:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <Label fx:id="detailIdentityType" text="" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Identity Number:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <Label fx:id="detailIdentityNumber" text="" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Account Type:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <Label fx:id="detailAccountType" text="" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Initial Deposit:" style="-fx-font-weight: bold;" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <Label fx:id="detailDeposit" text="" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                </GridPane>
+                
+                <!-- Approval Actions -->
+                <HBox spacing="8" alignment="CENTER" style="-fx-padding: 8 0 0 0;">
+                    <Button text="✅ Approve Request" onAction="#handleApprove"
+                           style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 25; -fx-background-radius: 5; -fx-cursor: hand;">
+                        <font>
+                            <Font name="System Bold" size="11.2"/>
+                        </font>
+                    </Button>
+                    <Button text="❌ Reject Request" onAction="#handleReject"
+                           style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 25; -fx-background-radius: 5; -fx-cursor: hand;">
+                        <font>
+                            <Font name="System Bold" size="11.2"/>
+                        </font>
+                    </Button>
+                    <Button text="Close" onAction="#handleCloseDetails"
+                           style="-fx-background-color: #757575; -fx-text-fill: white; -fx-padding: 12 25; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+    <!-- Bottom Bar -->
+    <bottom>
+        <HBox spacing="8" alignment="CENTER_LEFT" 
+              style="-fx-background-color: white; -fx-padding: 12; -fx-border-color: #ddd; -fx-border-width: 1 0 0 0;">
+            <Label fx:id="statusLabel" text="Ready"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="⬅️ Back to Dashboard" onAction="#handleBackToDashboard"
+                   style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;">
+                <font>
+                    <Font name="System Bold" size="9.6"/>
+                </font>
+            </Button>
+        </HBox>
+    </bottom>
+    
+</BorderPane>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mybank.controllers.AdminCustomerOversightController"
+            stylesheets="@../css/style.css"
+            styleClass="root">
+    
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <padding>
+                    <Insets top="16" bottom="16" left="24" right="24"/>
+                </padding>
+                <Button text="← Back" onAction="#handleBack" styleClass="secondary-button"/>
+                <Label text="CUSTOMER OVERSIGHT" styleClass="title">
+                    <font>
+                        <Font name="System Bold" size="19.2"/>
+                    </font>
+                </Label>
+            </HBox>
+            
+            <!-- Statistics -->
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="8" bottom="8" left="24" right="24"/>
+                </padding>
+                <VBox>
+                    <Label text="Total Accounts" styleClass="stat-label"/>
+                    <Label fx:id="totalAccountsLabel" text="0" styleClass="stat-number"/>
+                </VBox>
+                <VBox>
+                    <Label text="Active" styleClass="stat-label"/>
+                    <Label fx:id="activeAccountsLabel" text="0" styleClass="stat-number"/>
+                </VBox>
+                <VBox>
+                    <Label text="Blocked" styleClass="stat-label"/>
+                    <Label fx:id="blockedAccountsLabel" text="0" styleClass="stat-number"/>
+                </VBox>
+                <VBox>
+                    <Label text="Total Balance" styleClass="stat-label"/>
+                    <Label fx:id="totalBalanceLabel" text="৳ 0.00" styleClass="stat-number"/>
+                </VBox>
+            </HBox>
+            
+            <!-- Search and Filter -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="8" bottom="12" left="24" right="24"/>
+                </padding>
+                <TextField fx:id="searchField" promptText="Search by account number or name..." prefWidth="240"/>
+                <ComboBox fx:id="filterComboBox" prefWidth="120"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" bottom="16" left="24" right="24"/>
+            </padding>
+            
+            <Label fx:id="messageLabel" visible="false" managed="false" wrapText="true"/>
+            
+            <TableView fx:id="accountsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="accountNumberColumn" text="Account #" prefWidth="80"/>
+                    <TableColumn fx:id="ownerNameColumn" text="Owner Name" prefWidth="120"/>
+                    <TableColumn fx:id="accountTypeColumn" text="Type" prefWidth="80"/>
+                    <TableColumn fx:id="balanceColumn" text="Balance" prefWidth="96"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                    <TableColumn fx:id="createdDateColumn" text="Created Date" prefWidth="120"/>
+                </columns>
+            </TableView>
+            
+            <HBox spacing="8" alignment="CENTER">
+                <Button text="Block Account" onAction="#handleBlockAccount" styleClass="danger-button" prefWidth="96"/>
+                <Button text="Unblock Account" onAction="#handleUnblockAccount" styleClass="success-button" prefWidth="104"/>
+                <Button text="Approve Account" onAction="#handleApproveAccount" styleClass="primary-button" prefWidth="112"/>
+                <Button text="View Details" onAction="#handleViewDetails" styleClass="info-button" prefWidth="96"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

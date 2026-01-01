@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mybank.controllers.AccountOverviewController"
+            styleClass="root-container" fitToWidth="true">
+    
+    <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 24 40 24 40;">
+        
+        <!-- Header -->
+        <Label text="Account Overview" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28.8" />
+            </font>
+        </Label>
+        
+        <Label text="Complete summary of your account information" styleClass="subtitle-label">
+            <font>
+                <Font name="System" size="11.2" />
+            </font>
+        </Label>
+        
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" text="" wrapText="true">
+            <font>
+                <Font name="System" size="10.4" />
+            </font>
+        </Label>
+        
+        <!-- Main Content Grid -->
+        <GridPane hgap="30.0" vgap="20.0" style="-fx-background-color: #ffffff; -fx-padding: 24; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+            
+            <!-- Left Column: Account Information -->
+            <VBox spacing="16" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                
+                <!-- Account Details Card -->
+                <VBox spacing="12" style="-fx-background-color: #e3f2fd; -fx-padding: 16; -fx-background-radius: 8;">
+                    <Label text="📋 Account Information" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1565c0;" />
+                    
+                    <HBox spacing="8">
+                        <Label text="Account Number:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="accountNumberLabel" text="****0000" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Account Holder:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="ownerNameLabel" text="Name" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Account Type:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="accountTypeLabel" text="Savings" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Status:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="accountStatusLabel" text="ACTIVE" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Account Created:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="createdDateLabel" text="Date" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                </VBox>
+                
+                <!-- Balance Information Card -->
+                <VBox spacing="12" style="-fx-background-color: #e8f5e9; -fx-padding: 16; -fx-background-radius: 8;">
+                    <Label text="💰 Balance Information" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2e7d32;" />
+                    
+                    <VBox spacing="4">
+                        <Label text="Current Balance:" style="-fx-font-weight: bold; -fx-text-fill: black;" />
+                        <Label fx:id="currentBalanceLabel" text="0.00 TAKA" style="-fx-text-fill: black;" />
+                    </VBox>
+                    
+                    <VBox spacing="4">
+                        <Label text="Available Balance:" style="-fx-font-weight: bold; -fx-text-fill: black;" />
+                        <Label fx:id="availableBalanceLabel" text="0.00 TAKA" style="-fx-text-fill: black;" />
+                    </VBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Last Transaction:" style="-fx-font-weight: bold; -fx-min-width: 140px; -fx-text-fill: black;" />
+                        <Label fx:id="lastTransactionLabel" text="Never" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                    </HBox>
+                </VBox>
+                
+                <!-- Contact Information Card -->
+                <VBox spacing="12" style="-fx-background-color: #fff3e0; -fx-padding: 16; -fx-background-radius: 8;">
+                    <Label text="📧 Contact Information" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #f57c00;" />
+                    
+                    <HBox spacing="8">
+                        <Label text="Email:" style="-fx-font-weight: bold; -fx-min-width: 80px; -fx-text-fill: black;" />
+                        <Label fx:id="emailLabel" text="Not provided" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Phone:" style="-fx-font-weight: bold; -fx-min-width: 80px; -fx-text-fill: black;" />
+                        <Label fx:id="phoneLabel" text="Not provided" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                    </HBox>
+                </VBox>
+                
+            </VBox>
+            
+            <!-- Right Column: Statistics and Loan Info -->
+            <VBox spacing="16" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                
+                <!-- Statistics Card -->
+                <VBox spacing="12" style="-fx-background-color: #f3e5f5; -fx-padding: 16; -fx-background-radius: 8;">
+                    <Label text="📊 Account Statistics" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7b1fa2;" />
+                    
+                    <HBox spacing="8">
+                        <Label text="Total Transactions:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="totalTransactionsLabel" text="0" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Total Deposits:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="totalDepositsLabel" text="0.00 TAKA" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Total Withdrawals:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="totalWithdrawalsLabel" text="0.00 TAKA" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <Separator />
+                    
+                    <HBox spacing="8">
+                        <Label text="Account Health:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="accountHealthLabel" text="HEALTHY" style="-fx-font-size: 13px; -fx-text-fill: black;" />
+                    </HBox>
+                </VBox>
+                
+                <!-- Loan Information Card (Only visible for loan accounts) -->
+                <VBox fx:id="loanInfoSection" spacing="12" style="-fx-background-color: #fce4ec; -fx-padding: 16; -fx-background-radius: 8;">
+                    <Label text="🏦 Loan Information" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #c2185b;" />
+                    
+                    <HBox spacing="8">
+                        <Label text="Loan Amount:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="loanAmountLabel" text="0.00 TAKA" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Outstanding:" style="-fx-font-weight: bold; -fx-min-width: 150px;" />
+                        <Label fx:id="outstandingBalanceLabel" text="0.00 TAKA" style="-fx-font-size: 11px; -fx-text-fill: #c62828;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Interest Rate:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="interestRateLabel" text="0.00%" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Monthly Installment:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="installmentAmountLabel" text="0.00 TAKA" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Next Due Date:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="nextDueDateLabel" text="N/A" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Repayment Status:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="repaymentStatusLabel" text="ACTIVE" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <HBox spacing="8">
+                        <Label text="Loan Term:" style="-fx-font-weight: bold; -fx-min-width: 150px; -fx-text-fill: black;" />
+                        <Label fx:id="loanTermLabel" text="0 months" style="-fx-font-size: 11px; -fx-text-fill: black;" />
+                    </HBox>
+                    
+                    <Separator />
+                    
+                    <VBox spacing="4">
+                        <Label text="Repayment Progress:" style="-fx-font-weight: bold; -fx-text-fill: black;" />
+                        <Label fx:id="repaymentProgressLabel" text="0.0% Repaid" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: black;" />
+                    </VBox>
+                </VBox>
+                
+                <!-- Security Notice -->
+                <VBox spacing="8" style="-fx-background-color: #fff9c4; -fx-padding: 12; -fx-background-radius: 8;">
+                    <Label text="🔒 Security Notice" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #f57f17;" />
+                    <Label text="• Your account information is secure and encrypted" wrapText="true" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                    <Label text="• Only you can view this information" wrapText="true" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                    <Label text="• Account numbers are partially masked for security" wrapText="true" style="-fx-font-size: 10px; -fx-text-fill: black;" />
+                </VBox>
+                
+            </VBox>
+        </GridPane>
+        
+        <!-- Action Buttons -->
+        <HBox spacing="12" alignment="CENTER">
+            <Button text="Refresh Overview" onAction="#refreshOverview" styleClass="action-button" prefWidth="180" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+            
+            <Button text="Back to Dashboard" onAction="#backToDashboard" styleClass="back-button" prefWidth="180" prefHeight="36">
+                <font>
+                    <Font name="System Bold" size="11.2" />
+                </font>
+            </Button>
+        </HBox>
+        
+    </VBox>
+    
+</ScrollPane>
