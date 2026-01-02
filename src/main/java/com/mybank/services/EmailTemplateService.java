@@ -245,11 +245,9 @@ public class EmailTemplateService {
             "═══════════════════════════════════════════\n\n" +
             "You have THREE options to unblock your account:\n\n" +
             "OPTION 1: Call Customer Support\n" +
-            "   📞 Phone: 1-800-MYBANK-HELP\n" +
             "   ⏰ Hours: 24/7 Support Available\n" +
             "   📋 Have Ready: Your ID and account number\n\n" +
             "OPTION 2: Email Support\n" +
-            "   📧 Email: support@mybank.com\n" +
             "   📝 Include: Full name, account number, phone number\n" +
             "   📎 Attach: Copy of your ID (for verification)\n" +
             "   ⏱️ Response: Within 24 hours\n\n" +
@@ -280,9 +278,7 @@ public class EmailTemplateService {
             "           NEED HELP?\n" +
             "═══════════════════════════════════════════\n\n" +
             "We're here to help you 24/7:\n" +
-            "📞 Call: 1-800-MYBANK-HELP\n" +
-            "📧 Email: support@mybank.com\n" +
-            "💬 Chat: www.mybank.com/support\n" +
+            " Chat: www.mybank.com/support\n" +
             "🏢 Branch Locator: www.mybank.com/branches\n\n" +
             "Your security is our top priority.\n" +
             "We apologize for any inconvenience.\n\n" +
@@ -359,8 +355,7 @@ public class EmailTemplateService {
             "2. Login with:\n" +
             "   • Phone Number: Your registered phone number\n" +
             "   • Password: %s\n" +
-            "3. You will be prompted to set your new secure password\n" +
-            "4. Start banking!\n\n" +
+            "3. Start banking!\n\n" +
             "═══════════════════════════════════════════\n" +
             "           NOTIFICATION SYSTEM\n" +
             "═══════════════════════════════════════════\n\n" +
@@ -376,8 +371,6 @@ public class EmailTemplateService {
             "           CUSTOMER SUPPORT\n" +
             "═══════════════════════════════════════════\n\n" +
             "Need help? Contact us:\n" +
-            "📧 Email: support@mybank.com\n" +
-            "📞 Phone: 1-800-MYBANK-HELP\n" +
             "🏢 Visit any MY BANK branch\n\n" +
             "Thank you for choosing MY BANK!\n" +
             "We're excited to serve you.\n\n" +
@@ -481,9 +474,7 @@ public class EmailTemplateService {
             "✓ Account must meet minimum age requirement\n" +
             "✓ Annual cheque book limit not exceeded\n" +
             "✓ Account in good standing\n\n" +
-            "For assistance, please contact:\n" +
-            "📧 Email: support@mybank.com\n" +
-            "📞 Phone: 1-800-MYBANK-HELP\n\n" +
+            "For assistance, please contact your branch.\n\n" +
             "Thank you for banking with MY BANK.\n\n" +
             "Best regards,\n" +
             "MY BANK Team\n\n" +
@@ -555,9 +546,7 @@ public class EmailTemplateService {
             "• Signature mismatch\n" +
             "• Cheque post-dated or stale-dated\n" +
             "• Account frozen or closed\n\n" +
-            "For assistance, please contact:\n" +
-            "📧 Email: support@mybank.com\n" +
-            "📞 Phone: 1-800-MYBANK-HELP\n\n" +
+            "For assistance, please contact your branch.\n\n" +
             "Best regards,\n" +
             "MY BANK Team\n\n" +
             "---\n" +

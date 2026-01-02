@@ -1,0 +1,87 @@
+# TEMPLATE - Copy this to notification.properties and fill in your credentials
+# DO NOT commit notification.properties with real credentials!
+
+# ═══════════════════════════════════════════════════════════════
+#                    EMAIL CONFIGURATION (SMTP)
+# ═══════════════════════════════════════════════════════════════
+# NOTE: This system uses EMAIL-ONLY notifications
+# All customer notifications are sent via email (no SMS)
+# Customers provide phone numbers during registration for contact purposes only
+
+# Enable/Disable email notifications
+email.enabled=false
+
+# SMTP Server Settings
+# Gmail: smtp.gmail.com, port 587
+# Outlook: smtp.office365.com, port 587
+email.smtp.host=smtp.gmail.com
+email.smtp.port=587
+email.smtp.auth=true
+email.smtp.starttls.enable=true
+
+# Email From Information
+email.from.address=noreply@mybank.com
+email.from.name=My Bank Notifications
+
+# Email Credentials
+# IMPORTANT: For Gmail, use App Password (not regular password)
+# Generate at: https://myaccount.google.com/apppasswords
+email.username=your-email@gmail.com
+email.password=your-app-password-here
+
+
+# ═══════════════════════════════════════════════════════════════
+#                    SMS CONFIGURATION - DISABLED
+# ═══════════════════════════════════════════════════════════════
+# SMS notifications are DISABLED in this system
+# All notifications (transactions, approvals, security alerts) are sent via EMAIL
+# Phone numbers are collected but only used for contact purposes, not for SMS
+
+# SMS is permanently disabled
+sms.enabled=false
+sms.provider=not-used
+sms.twilio.account.sid=not-used
+sms.twilio.auth.token=not-used
+sms.twilio.phone.number=not-used
+
+
+# ═══════════════════════════════════════════════════════════════
+#                    NOTIFICATION SETTINGS
+# ═══════════════════════════════════════════════════════════════
+
+# Retry settings for failed email notifications
+notification.retry.enabled=true
+notification.retry.max.attempts=3
+notification.retry.delay.seconds=5
+
+# Debug Mode
+# When true: Prints notifications to console even if real sending is enabled
+# When false: Only sends actual notifications, no console output
+notification.debug.mode=true
+
+
+# ═══════════════════════════════════════════════════════════════
+#                    QUICK SETUP GUIDE
+# ═══════════════════════════════════════════════════════════════
+#
+# FOR EMAIL (Gmail) - REQUIRED:
+# 1. Go to https://myaccount.google.com/apppasswords
+# 2. Create an App Password
+# 3. Set email.username to your Gmail address
+# 4. Set email.password to the 16-character App Password
+# 5. Set email.enabled=true
+#
+# NOTIFICATION TYPES (All via EMAIL):
+# ✓ Account approval notifications
+# ✓ Login/Logout alerts
+# ✓ Transaction confirmations (deposits, withdrawals, transfers)
+# ✓ Password change alerts
+# ✓ Security notifications
+# ✓ Account status updates
+#
+# FOR TESTING:
+# - Keep email.enabled=false
+# - Notifications will be printed to console (simulated)
+# - Good for development without using email quota
+#
+# ═══════════════════════════════════════════════════════════════

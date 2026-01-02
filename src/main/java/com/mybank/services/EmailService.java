@@ -95,12 +95,26 @@ public class EmailService {
         }
         
         try {
-            // Setup mail server properties
+            // Setup mail server properties with enhanced security and timeout settings
             Properties mailProps = new Properties();
             mailProps.put("mail.smtp.host", config.getProperty("email.smtp.host"));
             mailProps.put("mail.smtp.port", config.getProperty("email.smtp.port"));
             mailProps.put("mail.smtp.auth", config.getProperty("email.smtp.auth"));
             mailProps.put("mail.smtp.starttls.enable", config.getProperty("email.smtp.starttls.enable"));
+            
+            // SSL/TLS Configuration for Gmail
+            mailProps.put("mail.smtp.ssl.trust", config.getProperty("email.smtp.host"));
+            mailProps.put("mail.smtp.ssl.protocols", "TLSv1.2 TLSv1.3");
+            
+            // Timeout settings (30 seconds each)
+            mailProps.put("mail.smtp.connectiontimeout", "30000");
+            mailProps.put("mail.smtp.timeout", "30000");
+            mailProps.put("mail.smtp.writetimeout", "30000");
+            
+            // Debug mode for troubleshooting
+            if (debugMode) {
+                mailProps.put("mail.debug", "true");
+            }
             
             // Create authenticator
             final String username = config.getProperty("email.username");
