@@ -115,10 +115,10 @@ public class EmailService {
             mailProps.put("mail.smtp.timeout", "30000");
             mailProps.put("mail.smtp.writetimeout", "30000");
             
-            // Debug mode disabled for production (uncomment below to enable for troubleshooting)
-            // if (debugMode) {
-            //     mailProps.put("mail.debug", "true");
-            // }
+            // Debug mode for troubleshooting
+            if (debugMode) {
+                mailProps.put("mail.debug", "true");
+            }
             
             // Create authenticator
             final String username = config.getProperty("email.username");
