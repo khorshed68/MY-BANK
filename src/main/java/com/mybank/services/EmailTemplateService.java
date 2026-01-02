@@ -169,9 +169,7 @@ public class EmailTemplateService {
             "Change Time: %s\n\n" +
             "IMPORTANT SECURITY NOTICE:\n" +
             "If you did NOT make this change, your account may be compromised. " +
-            "Please contact our customer support IMMEDIATELY at:\n" +
-            "- Phone: 1-800-MYBANK-HELP\n" +
-            "- Email: security@mybank.com\n\n" +
+            "Please contact our customer support IMMEDIATELY.\n\n" +
             "We recommend:\n" +
             "1. Change your password immediately\n" +
             "2. Review recent account activity\n" +
@@ -206,9 +204,6 @@ public class EmailTemplateService {
             "2. Change your password\n" +
             "3. Review your account for unauthorized activity\n\n" +
             "Note: Your account will be automatically blocked after 3 failed login attempts.\n\n" +
-            "Contact our Security Team:\n" +
-            "- Phone: 1-800-MYBANK-HELP\n" +
-            "- Email: security@mybank.com\n\n" +
             "Best regards,\n" +
             "MY BANK Security Team\n\n" +
             "---\n" +

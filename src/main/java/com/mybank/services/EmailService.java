@@ -101,20 +101,24 @@ public class EmailService {
             mailProps.put("mail.smtp.port", config.getProperty("email.smtp.port"));
             mailProps.put("mail.smtp.auth", config.getProperty("email.smtp.auth"));
             mailProps.put("mail.smtp.starttls.enable", config.getProperty("email.smtp.starttls.enable"));
+            mailProps.put("mail.smtp.starttls.required", "true");
             
             // SSL/TLS Configuration for Gmail
-            mailProps.put("mail.smtp.ssl.trust", config.getProperty("email.smtp.host"));
-            mailProps.put("mail.smtp.ssl.protocols", "TLSv1.2 TLSv1.3");
+            mailProps.put("mail.smtp.ssl.trust", "*");
+            mailProps.put("mail.smtp.ssl.protocols", "TLSv1.2");
+            
+            // Enable TLS
+            mailProps.put("mail.smtp.EnableSSL.enable", "true");
             
             // Timeout settings (30 seconds each)
             mailProps.put("mail.smtp.connectiontimeout", "30000");
             mailProps.put("mail.smtp.timeout", "30000");
             mailProps.put("mail.smtp.writetimeout", "30000");
             
-            // Debug mode for troubleshooting
-            if (debugMode) {
-                mailProps.put("mail.debug", "true");
-            }
+            // Debug mode disabled for production (uncomment below to enable for troubleshooting)
+            // if (debugMode) {
+            //     mailProps.put("mail.debug", "true");
+            // }
             
             // Create authenticator
             final String username = config.getProperty("email.username");
@@ -194,13 +198,16 @@ public class EmailService {
      * Print simulated email to console (for debugging/testing)
      */
     private void printSimulatedEmail(String recipient, String subject, String message) {
-        System.out.println("═══════════════════════════════════════════════════════");
-        System.out.println("📧 SIMULATED EMAIL (Real sending disabled)");
+        System.out.println("=======================================================");
+        System.out.println(">> SIMULATED EMAIL (Real sending disabled)");
         System.out.println("TO: " + recipient);
         System.out.println("SUBJECT: " + subject);
-        System.out.println("───────────────────────────────────────────────────────");
-        System.out.println(message);
-        System.out.println("═══════════════════════════════════════════════════════\n");
+        System.out.println("-------------------------------------------------------");
+        // Remove special characters from message for console display
+        String cleanMessage = message.replaceAll("[═─━│┃┏┓┗┛├┤┬┴┼╋]", "-");
+        cleanMessage = cleanMessage.replaceAll("[⚠✓✅❌📧📞🏢🎉🔒💬🆔📋📝📎⏱⏰]", "");
+        System.out.println(cleanMessage);
+        System.out.println("=======================================================\n");
     }
     
     /**
