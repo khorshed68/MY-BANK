@@ -218,8 +218,22 @@ public class AdminRegistrationController {
         File file = fileChooser.showOpenDialog(profileImageView.getScene().getWindow());
         if (file != null) {
             try {
+                // Check file size (max 2MB)
+                long fileSizeInMB = file.length() / (1024 * 1024);
+                if (fileSizeInMB > 2) {
+                    showError("Image file size must be less than 2MB");
+                    return;
+                }
+                
                 // Load image
                 Image image = new Image(file.toURI().toString());
+                
+                // Check if image loaded successfully
+                if (image.isError()) {
+                    showError("Failed to load image. Please select a valid image file.");
+                    return;
+                }
+                
                 profileImageView.setImage(image);
                 
                 // Calculate viewport to center the image
@@ -238,10 +252,14 @@ public class AdminRegistrationController {
                 profileImageView.setSmooth(true);
                 
                 selectedImageFile = file;
-                profileImageLabel.setText("Picture selected ✓");
-                profileImageLabel.setStyle("-fx-text-fill: #2e7d32; -fx-font-size: 10px; -fx-font-weight: 500;");
+                
+                // Hide the "No Image" label and show success indicator
+                profileImageLabel.setVisible(false);
+                profileImageLabel.setManaged(false);
+                
             } catch (Exception e) {
                 showError("Failed to load image: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -296,7 +314,8 @@ public class AdminRegistrationController {
         profileImageView.setViewport(null); // Reset viewport
         profileImageLabel.setText("No Image");
         profileImageLabel.setStyle("-fx-text-fill: #999; -fx-font-size: 10px;");
-        profileImageLabel.setStyle("-fx-text-fill: #757575; -fx-font-size: 9px;");
+        profileImageLabel.setVisible(true);
+        profileImageLabel.setManaged(true);
     }
     
     /**
@@ -349,8 +368,14 @@ public class AdminRegistrationController {
         
         // Setup profile image view with circular clip
         if (profileImageView != null) {
-            Circle clip = new Circle(40, 40, 40);
+            Circle clip = new Circle(47, 47, 47);
             profileImageView.setClip(clip);
+        }
+        
+        // Ensure label is visible initially
+        if (profileImageLabel != null) {
+            profileImageLabel.setVisible(true);
+            profileImageLabel.setManaged(true);
         }
         
         // Add listeners to clear error on input

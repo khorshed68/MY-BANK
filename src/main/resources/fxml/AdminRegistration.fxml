@@ -42,11 +42,7 @@
                     <ImageView fx:id="profileImageView" 
                               fitWidth="94" fitHeight="94" 
                               preserveRatio="false"
-                              smooth="true">
-                        <clip>
-                            <javafx.scene.shape.Circle centerX="47" centerY="47" radius="47"/>
-                        </clip>
-                    </ImageView>
+                              smooth="true"/>
                     <Label fx:id="profileImageLabel" text="No Image" style="-fx-text-fill: #999; -fx-font-size: 10px;"/>
                 </StackPane>
                 <VBox spacing="6" alignment="CENTER_LEFT">
