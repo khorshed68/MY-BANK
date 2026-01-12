@@ -1,6 +1,7 @@
 package com.mybank;
 
 import com.mybank.models.Staff;
+import com.mybank.services.AdminService;
 import com.mybank.services.StaffService;
 
 import javafx.application.Application;
@@ -24,7 +25,10 @@ public class Main extends Application {
         try {
             primaryStageObj = primaryStage;
             
-            // Initialize default admin account
+            // Initialize admin service and create default admin account
+            AdminService.initialize();
+            
+            // Initialize default admin account (legacy staff-based admin)
             StaffService.initializeDefaultAdmin();
             
             // Load Login FXML

@@ -58,24 +58,39 @@ public class AdminManagementController {
     
     @FXML
     private void initialize() {
-        currentAdmin = AdminService.getCurrentAdmin();
-        
-        if (currentAdmin == null || !currentAdmin.isSuperAdmin()) {
+        try {
+            currentAdmin = AdminService.getCurrentAdmin();
+            
+            if (currentAdmin == null || !currentAdmin.isSuperAdmin()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Access Denied");
+                alert.setHeaderText("Super Admin Only");
+                alert.setContentText("Only super administrators can access this module.");
+                alert.showAndWait();
+                Main.showAdminDashboard();
+                return;
+            }
+            
+            setupTable();
+            loadAdmins();
+        } catch (Exception e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Access Denied");
-            alert.setHeaderText("Super Admin Only");
-            alert.setContentText("Only super administrators can access this module.");
+            alert.setTitle("Initialization Error");
+            alert.setHeaderText("Failed to Initialize Admin Management");
+            alert.setContentText("Error: " + e.getMessage());
             alert.showAndWait();
             Main.showAdminDashboard();
-            return;
         }
-        
-        setupTable();
-        loadAdmins();
     }
     
     private void setupTable() {
-        if (adminTable != null) {
+        if (adminTable == null) {
+            System.err.println("ERROR: adminTable is null! FXML binding may have failed.");
+            return;
+        }
+        
+        try {
             idColumn.setCellValueFactory(new PropertyValueFactory<>("adminId"));
             usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
             fullNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -105,16 +120,37 @@ public class AdminManagementController {
                     }
                 }
             });
+            
+            System.out.println("Admin table setup completed successfully");
+        } catch (Exception e) {
+            System.err.println("ERROR setting up table: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     
     private void loadAdmins() {
         if (adminTable != null) {
-            List<Admin> admins = AdminService.getAllAdmins();
-            if (admins != null) {
-                ObservableList<Admin> adminList = FXCollections.observableArrayList(admins);
-                adminTable.setItems(adminList);
+            try {
+                System.out.println("Loading admins from database...");
+                List<Admin> admins = AdminService.getAllAdmins();
+                if (admins != null) {
+                    System.out.println("Loaded " + admins.size() + " admins from database");
+                    ObservableList<Admin> adminList = FXCollections.observableArrayList(admins);
+                    adminTable.setItems(adminList);
+                    adminTable.refresh(); // Force table refresh
+                    System.out.println("Admin table updated successfully");
+                } else {
+                    System.err.println("WARNING: AdminService.getAllAdmins() returned null");
+                    adminTable.setItems(FXCollections.observableArrayList());
+                }
+            } catch (Exception e) {
+                System.err.println("ERROR loading admins: " + e.getMessage());
+                e.printStackTrace();
+                showError("Failed to load admins: " + e.getMessage());
+                adminTable.setItems(FXCollections.observableArrayList());
             }
+        } else {
+            System.err.println("ERROR: adminTable is null in loadAdmins()");
         }
     }
     
@@ -173,28 +209,46 @@ public class AdminManagementController {
                 boolean isSuperAdmin = superAdminCheck.isSelected();
                 
                 if (username.isEmpty() || password.isEmpty() || fullName.isEmpty() || email.isEmpty()) {
-                    showError("All required fields must be filled!");
                     return null;
                 }
                 
                 if (password.length() < 6) {
-                    showError("Password must be at least 6 characters!");
                     return null;
                 }
                 
-                boolean success = AdminService.createAdmin(username, password, fullName, email, phone, isSuperAdmin);
-                
-                if (success) {
-                    showSuccess("Admin created successfully!");
-                    loadAdmins();
-                } else {
-                    showError("Failed to create admin. Username or email may already exist.");
-                }
+                return new Admin(); // Return dummy object to indicate OK button was pressed
             }
             return null;
         });
         
-        dialog.showAndWait();
+        Optional<Admin> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String username = usernameField.getText().trim();
+            String password = passwordField.getText();
+            String fullName = fullNameField.getText().trim();
+            String email = emailField.getText().trim();
+            String phone = phoneField.getText().trim();
+            boolean isSuperAdmin = superAdminCheck.isSelected();
+            
+            if (username.isEmpty() || password.isEmpty() || fullName.isEmpty() || email.isEmpty()) {
+                showError("All required fields must be filled!");
+                return;
+            }
+            
+            if (password.length() < 6) {
+                showError("Password must be at least 6 characters!");
+                return;
+            }
+            
+            boolean success = AdminService.createAdmin(username, password, fullName, email, phone, isSuperAdmin);
+            
+            if (success) {
+                showSuccess("Admin created successfully!");
+                loadAdmins();
+            } else {
+                showError("Failed to create admin. Username or email may already exist.");
+            }
+        }
     }
     
     @FXML
@@ -239,30 +293,40 @@ public class AdminManagementController {
             if (dialogButton == updateButtonType) {
                 String fullName = fullNameField.getText().trim();
                 String email = emailField.getText().trim();
-                String phone = phoneField.getText().trim();
-                String status = statusCombo.getValue();
                 
                 if (fullName.isEmpty() || email.isEmpty()) {
-                    showError("Full name and email are required!");
                     return null;
                 }
                 
-                boolean success = AdminService.updateAdmin(selectedAdmin.getAdminId(), fullName, email, phone);
-                if (success && !status.equals(selectedAdmin.getStatus())) {
-                    success = AdminService.setAdminStatus(selectedAdmin.getAdminId(), status);
-                }
-                
-                if (success) {
-                    showSuccess("Admin updated successfully!");
-                    loadAdmins();
-                } else {
-                    showError("Failed to update admin.");
-                }
+                return new Admin(); // Return dummy object to indicate OK button was pressed
             }
             return null;
         });
         
-        dialog.showAndWait();
+        Optional<Admin> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String fullName = fullNameField.getText().trim();
+            String email = emailField.getText().trim();
+            String phone = phoneField.getText().trim();
+            String status = statusCombo.getValue();
+            
+            if (fullName.isEmpty() || email.isEmpty()) {
+                showError("Full name and email are required!");
+                return;
+            }
+            
+            boolean success = AdminService.updateAdmin(selectedAdmin.getAdminId(), fullName, email, phone);
+            if (success && !status.equals(selectedAdmin.getStatus())) {
+                success = AdminService.setAdminStatus(selectedAdmin.getAdminId(), status);
+            }
+            
+            if (success) {
+                showSuccess("Admin updated successfully!");
+                loadAdmins();
+            } else {
+                showError("Failed to update admin.");
+            }
+        }
     }
     
     @FXML

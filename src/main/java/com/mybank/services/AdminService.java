@@ -1,15 +1,15 @@
 package com.mybank.services;
 
-import com.mybank.models.Admin;
-import com.mybank.models.AuditLog;
-import com.mybank.database.AdminDAO;
-import com.mybank.database.AuditLogDAO;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
+
+import com.mybank.database.AdminDAO;
+import com.mybank.database.AuditLogDAO;
+import com.mybank.models.Admin;
+import com.mybank.models.AuditLog;
 
 /**
  * Service class for Admin operations with security and audit logging.
@@ -24,18 +24,25 @@ public class AdminService {
      * Initialize admin tables
      */
     public static void initialize() {
+        System.out.println("=== Initializing AdminService ===");
         AdminDAO.createTable();
         AuditLogDAO.createTable();
+        System.out.println("Admin tables created/verified");
         
         // Create default super admin if no admins exist
         createDefaultSuperAdmin();
+        System.out.println("=== AdminService initialization complete ===");
     }
     
     /**
      * Create default super admin account
      */
     private static void createDefaultSuperAdmin() {
-        if (AdminDAO.getAllAdmins().isEmpty()) {
+        List<Admin> existingAdmins = AdminDAO.getAllAdmins();
+        System.out.println("Found " + existingAdmins.size() + " existing admin(s) in database");
+        
+        if (existingAdmins.isEmpty()) {
+            System.out.println("Creating default super admin account...");
             Admin superAdmin = new Admin();
             superAdmin.setUsername("admin");
             superAdmin.setPassword(hashPassword("admin123"));
@@ -46,7 +53,16 @@ public class AdminService {
             superAdmin.setCreatedBy("SYSTEM");
             superAdmin.setSuperAdmin(true);
             
-            AdminDAO.insertAdmin(superAdmin);
+            boolean created = AdminDAO.insertAdmin(superAdmin);
+            if (created) {
+                System.out.println("✓ Default super admin created successfully");
+                System.out.println("  Username: admin");
+                System.out.println("  Password: admin123");
+            } else {
+                System.err.println("✗ Failed to create default super admin");
+            }
+        } else {
+            System.out.println("Admin accounts already exist, skipping default admin creation");
         }
     }
     
@@ -308,9 +324,12 @@ public class AdminService {
      */
     public static List<Admin> getAllAdmins() {
         if (currentAdmin == null) {
+            System.err.println("WARNING: getAllAdmins() called with null currentAdmin");
             return null;
         }
-        return AdminDAO.getAllAdmins();
+        List<Admin> admins = AdminDAO.getAllAdmins();
+        System.out.println("getAllAdmins() returning " + (admins != null ? admins.size() : "null") + " admin(s)");
+        return admins;
     }
     
     /**
