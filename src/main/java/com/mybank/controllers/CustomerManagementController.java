@@ -10,12 +10,15 @@ import com.mybank.Main;
 import com.mybank.database.DatabaseHelper;
 import com.mybank.models.Account;
 import com.mybank.models.Staff;
+import com.mybank.models.Transaction;
 import com.mybank.services.NotificationService;
 import com.mybank.services.StaffService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -27,6 +30,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Controller for customer management.
@@ -489,10 +494,186 @@ public class CustomerManagementController {
      */
     @FXML
     private void handleViewTransactions() {
-        if (selectedAccount == null) return;
+        if (selectedAccount == null) {
+            showError("Please select a customer account first.");
+            return;
+        }
         
-        // TODO: Navigate to transaction history view
-        showInfo("Transaction history view will be implemented in the next phase");
+        showTransactionHistoryDialog();
+    }
+    
+    /**
+     * Show transaction history dialog
+     */
+    private void showTransactionHistoryDialog() {
+        // Create a new stage for transaction history
+        Stage transactionStage = new Stage();
+        transactionStage.initModality(Modality.APPLICATION_MODAL);
+        transactionStage.setTitle("Transaction History - Account #" + selectedAccount.getAccountNumber());
+        
+        // Create table for transactions
+        TableView<Transaction> transactionTable = new TableView<>();
+        transactionTable.setStyle("-fx-background-color: white;");
+        
+        // Create columns
+        TableColumn<Transaction, Integer> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setPrefWidth(60);
+        idColumn.setStyle("-fx-alignment: CENTER;");
+        
+        TableColumn<Transaction, String> dateColumn = new TableColumn<>("Date & Time");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateColumn.setPrefWidth(180);
+        
+        TableColumn<Transaction, String> typeColumn = new TableColumn<>("Type");
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        typeColumn.setPrefWidth(120);
+        typeColumn.setStyle("-fx-alignment: CENTER;");
+        
+        // Style type column with colors
+        typeColumn.setCellFactory(column -> new TableCell<Transaction, String>() {
+            @Override
+            protected void updateItem(String type, boolean empty) {
+                super.updateItem(type, empty);
+                if (empty || type == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(type);
+                    switch (type.toUpperCase()) {
+                        case "DEPOSIT":
+                        case "TRANSFER IN":
+                            setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+                            break;
+                        case "WITHDRAW":
+                        case "TRANSFER OUT":
+                            setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                            break;
+                        default:
+                            setStyle("-fx-text-fill: #2c3e50; -fx-font-weight: bold;");
+                    }
+                }
+            }
+        });
+        
+        TableColumn<Transaction, Double> amountColumn = new TableColumn<>("Amount");
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amountColumn.setPrefWidth(150);
+        amountColumn.setStyle("-fx-alignment: CENTER-RIGHT;");
+        
+        // Format amount column
+        amountColumn.setCellFactory(column -> new TableCell<Transaction, Double>() {
+            @Override
+            protected void updateItem(Double amount, boolean empty) {
+                super.updateItem(amount, empty);
+                if (empty || amount == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(String.format("৳%.2f", amount));
+                    // Color based on transaction type
+                    Transaction transaction = getTableView().getItems().get(getIndex());
+                    if (transaction != null) {
+                        String type = transaction.getType().toUpperCase();
+                        if (type.contains("DEPOSIT") || type.contains("TRANSFER IN")) {
+                            setStyle("-fx-text-fill: green; -fx-font-weight: bold; -fx-alignment: CENTER-RIGHT;");
+                        } else if (type.contains("WITHDRAW") || type.contains("TRANSFER OUT")) {
+                            setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-alignment: CENTER-RIGHT;");
+                        } else {
+                            setStyle("-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-alignment: CENTER-RIGHT;");
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Add columns to table
+        transactionTable.getColumns().addAll(idColumn, dateColumn, typeColumn, amountColumn);
+        
+        // Load transactions from database
+        List<Transaction> transactions = getTransactionsForAccount(selectedAccount.getAccountNumber());
+        ObservableList<Transaction> transactionList = FXCollections.observableArrayList(transactions);
+        transactionTable.setItems(transactionList);
+        
+        // Create header label
+        Label headerLabel = new Label("Transaction History for " + selectedAccount.getCustomerName());
+        headerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-padding: 10;");
+        
+        Label accountInfoLabel = new Label(
+            "Account: " + selectedAccount.getAccountNumber() + 
+            " | Type: " + selectedAccount.getAccountType() + 
+            " | Balance: ৳" + String.format("%.2f", selectedAccount.getBalance())
+        );
+        accountInfoLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #34495e; -fx-padding: 5 10 10 10;");
+        
+        Label statsLabel = new Label("Total Transactions: " + transactions.size());
+        statsLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-padding: 0 10 10 10;");
+        
+        // Create close button
+        Button closeButton = new Button("Close");
+        closeButton.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;");
+        closeButton.setOnAction(e -> transactionStage.close());
+        
+        Button refreshButton = new Button("🔄 Refresh");
+        refreshButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;");
+        refreshButton.setOnAction(e -> {
+            List<Transaction> refreshedTransactions = getTransactionsForAccount(selectedAccount.getAccountNumber());
+            transactionTable.setItems(FXCollections.observableArrayList(refreshedTransactions));
+            statsLabel.setText("Total Transactions: " + refreshedTransactions.size());
+        });
+        
+        // Create button container
+        javafx.scene.layout.HBox buttonBox = new javafx.scene.layout.HBox(10);
+        buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10;");
+        buttonBox.getChildren().addAll(refreshButton, closeButton);
+        
+        // Create layout
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(15));
+        layout.setStyle("-fx-background-color: #ecf0f1;");
+        layout.getChildren().addAll(headerLabel, accountInfoLabel, statsLabel, transactionTable, buttonBox);
+        
+        // Set placeholder for empty table
+        Label placeholderLabel = new Label("No transactions found for this account");
+        placeholderLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #95a5a6;");
+        transactionTable.setPlaceholder(placeholderLabel);
+        
+        // Create scene and show
+        Scene scene = new Scene(layout, 700, 500);
+        transactionStage.setScene(scene);
+        transactionStage.setResizable(true);
+        transactionStage.showAndWait();
+    }
+    
+    /**
+     * Get transactions for a specific account
+     */
+    private List<Transaction> getTransactionsForAccount(int accountNumber) {
+        List<Transaction> transactions = new ArrayList<>();
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        
+        try {
+            ResultSet rs = dbHelper.getTransactionHistory(accountNumber);
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Transaction transaction = new Transaction(
+                        rs.getInt("id"),
+                        rs.getInt("accountNumber"),
+                        rs.getString("type"),
+                        rs.getDouble("amount"),
+                        rs.getString("timestamp")
+                    );
+                    transactions.add(transaction);
+                }
+                rs.close();
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading transactions: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return transactions;
     }
     
     /**
