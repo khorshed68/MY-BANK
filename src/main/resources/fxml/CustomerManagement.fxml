@@ -126,6 +126,8 @@
                            style="-fx-background-color: #9c27b0; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
                     <Button text="📝 View Transactions" onAction="#handleViewTransactions"
                            style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button fx:id="deleteBtn" text="🗑️ Delete Customer" onAction="#handleDeleteCustomer"
+                           style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
                 </HBox>
             </VBox>
             

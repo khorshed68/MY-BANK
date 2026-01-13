@@ -83,6 +83,7 @@
                 <Button text="Unblock Account" onAction="#handleUnblockAccount" styleClass="success-button" prefWidth="104"/>
                 <Button text="Approve Account" onAction="#handleApproveAccount" styleClass="primary-button" prefWidth="112"/>
                 <Button text="View Details" onAction="#handleViewDetails" styleClass="info-button" prefWidth="96"/>
+                <Button text="🗑️ Delete Customer" onAction="#handleDeleteCustomer" styleClass="danger-button" prefWidth="120"/>
             </HBox>
         </VBox>
     </center>

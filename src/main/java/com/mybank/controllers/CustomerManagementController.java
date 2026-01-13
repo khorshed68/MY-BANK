@@ -108,6 +108,9 @@ public class CustomerManagementController {
     @FXML
     private Button unblockBtn;
     
+    @FXML
+    private Button deleteBtn;
+    
     private Staff currentStaff;
     private Account selectedAccount;
     
@@ -674,6 +677,210 @@ public class CustomerManagementController {
         }
         
         return transactions;
+    }
+    
+    /**
+     * Handle delete customer
+     */
+    @FXML
+    private void handleDeleteCustomer() {
+        if (selectedAccount == null) {
+            showError("Please select a customer account first.");
+            return;
+        }
+        
+        // Create confirmation dialog with detailed warning
+        Alert confirmAlert = new Alert(Alert.AlertType.WARNING);
+        confirmAlert.setTitle("⚠️ Delete Customer Account");
+        confirmAlert.setHeaderText("CRITICAL ACTION: Permanently Delete Customer Data");
+        confirmAlert.setContentText(
+            "You are about to PERMANENTLY DELETE the following customer:\n\n" +
+            "Account Number: " + selectedAccount.getAccountNumber() + "\n" +
+            "Customer Name: " + selectedAccount.getCustomerName() + "\n" +
+            "Email: " + selectedAccount.getEmail() + "\n" +
+            "Phone: " + selectedAccount.getPhoneNumber() + "\n" +
+            "Current Balance: ৳" + String.format("%.2f", selectedAccount.getBalance()) + "\n\n" +
+            "⚠️ WARNING: This action will:\n" +
+            "• Delete the customer account permanently\n" +
+            "• Delete ALL transaction history\n" +
+            "• Delete ALL related data from the database\n" +
+            "• This action CANNOT be undone!\n\n" +
+            "Are you absolutely sure you want to proceed?"
+        );
+        
+        // Add custom buttons
+        confirmAlert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+        
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                // Second confirmation for critical action
+                Alert secondConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                secondConfirm.setTitle("Final Confirmation");
+                secondConfirm.setHeaderText("Last Chance to Cancel");
+                secondConfirm.setContentText(
+                    "This is your FINAL confirmation.\n\n" +
+                    "Customer: " + selectedAccount.getCustomerName() + "\n" +
+                    "Account: " + selectedAccount.getAccountNumber() + "\n\n" +
+                    "Type 'DELETE' to confirm permanent deletion:"
+                );
+                
+                // Add text field for confirmation
+                TextField confirmationField = new TextField();
+                confirmationField.setPromptText("Type DELETE here");
+                
+                VBox dialogContent = new VBox(10);
+                dialogContent.getChildren().addAll(
+                    new Label("This is your FINAL confirmation.\n\n" +
+                              "Customer: " + selectedAccount.getCustomerName() + "\n" +
+                              "Account: " + selectedAccount.getAccountNumber() + "\n\n" +
+                              "Type 'DELETE' to confirm permanent deletion:"),
+                    confirmationField
+                );
+                
+                secondConfirm.getDialogPane().setContent(dialogContent);
+                
+                secondConfirm.showAndWait().ifPresent(finalResponse -> {
+                    if (finalResponse == ButtonType.OK) {
+                        String typedText = confirmationField.getText().trim();
+                        if ("DELETE".equals(typedText)) {
+                            // Proceed with deletion
+                            if (deleteCustomerCompletely(selectedAccount.getAccountNumber())) {
+                                StaffService.logActivity(
+                                    currentStaff.getStaffId(), 
+                                    "DELETE_CUSTOMER", 
+                                    selectedAccount.getAccountNumber(), 
+                                    "Customer permanently deleted: " + selectedAccount.getCustomerName() + 
+                                    " (Balance: ৳" + String.format("%.2f", selectedAccount.getBalance()) + ")"
+                                );
+                                
+                                showSuccess(
+                                    "✅ Customer Deleted Successfully\n\n" +
+                                    "Account " + selectedAccount.getAccountNumber() + " and all related data\n" +
+                                    "have been permanently removed from the database."
+                                );
+                                
+                                handleCloseDetails();
+                                loadCustomers();
+                            }
+                        } else {
+                            showError("Deletion cancelled. You must type 'DELETE' exactly to confirm.");
+                        }
+                    }
+                });
+            }
+        });
+    }
+    
+    /**
+     * Delete customer completely from database
+     * This removes all customer data including transactions
+     */
+    private boolean deleteCustomerCompletely(int accountNumber) {
+        Connection conn = null;
+        boolean success = false;
+        
+        try {
+            conn = DatabaseHelper.getConnection();
+            conn.setAutoCommit(false); // Start transaction
+            
+            // 1. Delete all transactions for this account
+            String deleteTransactionsSql = "DELETE FROM transactions WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteTransactionsSql)) {
+                pstmt.setInt(1, accountNumber);
+                int transactionsDeleted = pstmt.executeUpdate();
+                System.out.println("Deleted " + transactionsDeleted + " transactions for account " + accountNumber);
+            }
+            
+            // 2. Delete from account_requests if exists
+            String deleteRequestsSql = "DELETE FROM account_requests WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteRequestsSql)) {
+                pstmt.setInt(1, accountNumber);
+                int requestsDeleted = pstmt.executeUpdate();
+                System.out.println("Deleted " + requestsDeleted + " account requests for account " + accountNumber);
+            } catch (Exception e) {
+                // Table might not exist, continue
+                System.out.println("account_requests table might not exist: " + e.getMessage());
+            }
+            
+            // 3. Delete any cheque records if exists
+            String deleteChequeSql = "DELETE FROM cheques WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteChequeSql)) {
+                pstmt.setInt(1, accountNumber);
+                int chequesDeleted = pstmt.executeUpdate();
+                System.out.println("Deleted " + chequesDeleted + " cheques for account " + accountNumber);
+            } catch (Exception e) {
+                // Table might not exist, continue
+                System.out.println("cheques table might not exist: " + e.getMessage());
+            }
+            
+            // 4. Delete any notifications for this account
+            String deleteNotificationsSql = "DELETE FROM notifications WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteNotificationsSql)) {
+                pstmt.setInt(1, accountNumber);
+                int notificationsDeleted = pstmt.executeUpdate();
+                System.out.println("Deleted " + notificationsDeleted + " notifications for account " + accountNumber);
+            } catch (Exception e) {
+                // Table might not exist, continue
+                System.out.println("notifications table might not exist: " + e.getMessage());
+            }
+            
+            // 5. Delete from users table (login credentials)
+            String deleteUserSql = "DELETE FROM users WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteUserSql)) {
+                pstmt.setInt(1, accountNumber);
+                int usersDeleted = pstmt.executeUpdate();
+                System.out.println("Deleted " + usersDeleted + " user records for account " + accountNumber);
+            } catch (Exception e) {
+                // Table might not exist, continue
+                System.out.println("users table might not exist: " + e.getMessage());
+            }
+            
+            // 6. Finally, delete the account itself
+            String deleteAccountSql = "DELETE FROM accounts WHERE accountNumber = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteAccountSql)) {
+                pstmt.setInt(1, accountNumber);
+                int accountsDeleted = pstmt.executeUpdate();
+                
+                if (accountsDeleted > 0) {
+                    System.out.println("✅ Successfully deleted account " + accountNumber);
+                    conn.commit(); // Commit all changes
+                    success = true;
+                } else {
+                    System.err.println("❌ No account found with number " + accountNumber);
+                    conn.rollback();
+                    showError("Account not found in database.");
+                }
+            }
+            
+        } catch (Exception e) {
+            System.err.println("❌ Error deleting customer: " + e.getMessage());
+            e.printStackTrace();
+            
+            // Rollback transaction on error
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (Exception rollbackEx) {
+                System.err.println("Error during rollback: " + rollbackEx.getMessage());
+            }
+            
+            showError("Error deleting customer: " + e.getMessage() + "\n\nAll changes have been rolled back.");
+            success = false;
+            
+        } finally {
+            // Restore auto-commit
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error closing connection: " + e.getMessage());
+            }
+        }
+        
+        return success;
     }
     
     /**
